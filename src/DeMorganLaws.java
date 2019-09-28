@@ -1,4 +1,3 @@
-package Package_Sandbox;
 
 public class DeMorganLaws {
 
