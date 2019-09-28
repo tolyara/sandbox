@@ -1,8 +1,7 @@
 
 public class Main {
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) {
         DeMorganLaws dm = new DeMorganLaws();
         dm.checkDeMorganLaws();
-        throw new Throwable();
     }
 }
