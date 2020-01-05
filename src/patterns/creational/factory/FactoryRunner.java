@@ -9,9 +9,9 @@ public class FactoryRunner {
 		DeveloperFactory developerFactory2 = DeveloperFactoryGenerator.createDeveloperFactoryBySpecialty("c++");
 		Developer developer2 = developerFactory2.createDeveloper();
 		developer2.writeCode();
-		DeveloperFactory developerFactory3 = DeveloperFactoryGenerator.createDeveloperFactoryBySpecialty("php");
-		Developer developer3 = developerFactory3.createDeveloper();
-		developer3.writeCode();
+//		DeveloperFactory developerFactory3 = DeveloperFactoryGenerator.createDeveloperFactoryBySpecialty("php");
+//		Developer developer3 = developerFactory3.createDeveloper();
+//		developer3.writeCode();
 	}
 
 }

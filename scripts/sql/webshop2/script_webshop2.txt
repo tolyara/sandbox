@@ -1,0 +1,67 @@
+
+create table customers (
+    id serial primary key,
+    name varchar(255),
+    phone varchar(30),
+    email varchar(255)
+)
+
+create table product_photos (
+    id serial primary key,
+    url varchar(255),
+    product_id integer references products(id)
+)
+
+insert into customers(name, phone, email) values ('Petr', '03', 'petr@gmail.com');
+
+select pp.* from product_photos pp left join products p on p.id = pp.product_id;
+
+product_photos_product_id_fkey
+
+alter table product_photos drop constraint product_photos_product_id_fkey;
+
+delete from product_photos where id = 2;
+
+select c.name, carts.id as cart_id from customers c left join carts on carts.customer_id = c.id 
+	left join cart_product cp on cp.cart_id = carts.id;
+
+select c.name, carts.id as cart_id, cp.product_id, p.price from customers c left join carts on carts.customer_id = c.id 
+	left join cart_product cp on cp.cart_id = carts.id
+    	left join products p on p.id = cp.product_id;
+
+// имена клиентов с общей суммой их заказов
+select c.name, sum(p.price) from customers c left join carts on carts.customer_id = c.id 
+	left join cart_product cp on cp.cart_id = carts.id
+    	left join products p on p.id = cp.product_id 
+        	group by c.name;
+
+select c.name, coalesce(sum(p.price), 0) as orders_sum from customers c left join carts on carts.customer_id = c.id 
+	left join cart_product cp on cp.cart_id = carts.id
+    	left join products p on p.id = cp.product_id 
+        	group by c.name;
+			order by orders_sum desc;
+		------	having sum(p.price) > 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

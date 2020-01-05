@@ -10,8 +10,6 @@ public class ObserverExample {
 		Observer observer2 = new Observer("two");
 		observer1.setState("new state");
 		observer2.setState("new state 2");
-//		System.out.println(observer1);
-//		System.out.println(observer2);
 	}
 
 }
