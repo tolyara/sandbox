@@ -1,3 +1,4 @@
+
 public class Main {
 	public static void main(String[] args) throws Exception {
 		I a = new A();
@@ -17,9 +18,22 @@ interface I {
 
 class A implements I {
 
-//	@Override
-//	public void m() {
-//		System.out.println("A");
+	 void m1() {
+	}
+
+	void m1(int n) {
+
+	}
+}
+
+class B extends A {
+
+	@Override
+	void m1() {
+	}
+
+//	void m1() {
+//
 //	}
 
 }
