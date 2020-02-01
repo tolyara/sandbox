@@ -9,7 +9,9 @@ public class WhyMultithreadingIsBad {
 
 	public static void main(String[] args) throws CloneNotSupportedException {
 
-		doDemoImmutable();
+//		doDemoImmutable();
+		System.out.println((new Person().hashCode()));
+		System.out.println((new Person().hashCode()));
 
 	}
 

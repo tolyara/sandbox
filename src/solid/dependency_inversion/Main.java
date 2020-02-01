@@ -5,6 +5,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		User user = new User(new DataAccess());
+//		User user = new User(new DataAccess2());
+
 		user.doJob();
 		
 	}
@@ -21,7 +23,16 @@ class DataAccess implements DAO {
 	
 	@Override
 	public void execute() {
-		System.out.println("execute... ");
+		System.out.println("DataAccess executing... ");
+	}
+	
+}
+
+class DataAccess2 implements DAO {
+	
+	@Override
+	public void execute() {
+		System.out.println("DataAccess2 executing... ");
 	}
 	
 }

@@ -1,4 +1,4 @@
-package interview;
+package interview.exceptions;
 
 public class ExceptionInFinally {
 	
