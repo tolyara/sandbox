@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Толянчик/git/sandbox/src/java_native_access/lib/jna-4.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Толянчик/eclipse-workspace/ConsoleAppV1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

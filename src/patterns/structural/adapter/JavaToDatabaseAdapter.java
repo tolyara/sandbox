@@ -23,3 +23,37 @@ public class JavaToDatabaseAdapter extends JavaApplication implements Database {
 	}
 	
 }
+
+
+
+
+
+//public class JavaToDatabaseAdapter implements Database {
+//	
+//	private final JavaApplication javaApp = new JavaApplication();
+//
+//	@Override
+//	public void insert() {
+//		javaApp.saveObject();
+//	}
+//
+//	@Override
+//	public void update() {
+//		javaApp.changeObject();
+//	}
+//
+//	@Override
+//	public void select() {
+//		javaApp.loadObject();
+//	}
+//
+//	@Override
+//	public void delete() {
+//		javaApp.removeObject();
+//	}
+//	
+//}
+
+
+
+

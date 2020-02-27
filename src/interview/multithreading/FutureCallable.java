@@ -21,11 +21,11 @@ public class FutureCallable {
 //		}
 		
 		Future<Integer> future = executorService.submit(new MyCallable());
-		Thread.sleep(100);
-		future.cancel(true);
-		System.out.println(future.isCancelled());
-//		Integer result = future.get();
-//		System.out.println(result);
+//		Thread.sleep(100);
+//		future.cancel(true);
+//		System.out.println(future.isCancelled());
+		Integer result = future.get();
+		System.out.println(result);
 		
 		System.out.println("Prepare to shutdown...");
 		executorService.shutdown();

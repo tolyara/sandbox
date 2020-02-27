@@ -33,7 +33,6 @@ public class Maps {
 		hashMap.put("c", "3");
 
 		for (Map.Entry<String, String> item : hashMap.entrySet()) {
-
 			System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
 		}
 

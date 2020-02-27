@@ -9,7 +9,8 @@ public class CompositeRunner {
 		Developer cppDeveloper = new CppDeveloper();
 		team.addDeveloper(firstJavaDeveloper);
 		team.addDeveloper(secondJavaDeveloper);
-		team.addDeveloper(cppDeveloper);		
+		team.addDeveloper(cppDeveloper);	
+//		team.removeDeveloper(secondJavaDeveloper);
 		team.createProject();
 	}
 

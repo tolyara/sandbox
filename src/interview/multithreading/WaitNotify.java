@@ -2,31 +2,34 @@ package interview.multithreading;
 
 public class WaitNotify {
 	
+	static Object lock = new Object();
+	
 	public static void main(String[] args) throws InterruptedException {
 		MyThread myThread = new MyThread();
 		myThread.start();
-		synchronized (myThread) {
-			myThread.wait();
+		synchronized (lock) {
+			lock.wait();
 		}
-		System.out.println(myThread.total);
+		System.out.println(myThread.total + " - " + Thread.currentThread().getName());
 	}
 	
 	static class MyThread extends Thread {
 		
-		int total;
+		int total = 0;
 		
 		@Override
 		public void run() {
-			synchronized (this) {
+			synchronized (lock) {
 				for (int i = 0; i < 5; i++) {
-					total += i;
+					total++;
+					System.out.println(total + " - " + Thread.currentThread().getName());
 					try {
-						sleep(500);
+						sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-				notify();
+				lock.notify();
 			}
 		}
 		
