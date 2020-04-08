@@ -13,7 +13,7 @@ public class Serialization {
 
 		User user = new User();
 		user.lifelevel = 55;
-		user.staticField = 40;
+		User.staticField = 40;
 		Sword sword = new Sword();
 		user.sword = sword;
 		user.sword.level = 5;
@@ -24,7 +24,8 @@ public class Serialization {
 		objectOutputStream.close();
 
 		user.lifelevel = 50;
-		user.staticField = 35;
+		User.staticField = 35;
+//		System.out.println(user.sword);
 
 		FileInputStream fileInputStream = new FileInputStream("Tempfile");
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -32,7 +33,7 @@ public class Serialization {
 		objectInputStream.close();
 
 		System.out.println(userAfterSerialization.lifelevel);
-		System.out.println(userAfterSerialization.staticField);
+		System.out.println(User.staticField);
 		System.out.println(userAfterSerialization.sword);
 //		System.out.println(user + " <-> " + userAfterSerialization);
 
@@ -42,15 +43,19 @@ public class Serialization {
 
 class User implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	int lifelevel;
 	static int staticField;
 	transient Sword sword;
 
 }
 
-//class Sword implements Serializable {
-class Sword {
+class Sword implements Serializable {
+//class Sword {
 
+	private static final long serialVersionUID = 1L;
+	
 	int level;
 
 }

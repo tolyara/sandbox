@@ -25,6 +25,11 @@ public class Generics {
 //		stringCell.setT(12);
 		String string = stringCell.getT();
 		System.out.println(string);
+		
+		Cell<Integer> integerCell = new Cell<>();
+		integerCell.setT(11);
+		Integer integer = integerCell.getT();
+		System.out.println(integer);
 
 	}
 }

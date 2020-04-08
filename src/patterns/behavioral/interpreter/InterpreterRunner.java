@@ -5,7 +5,7 @@ public class InterpreterRunner {
 	public static void main(String[] args) {
 		
 		Expression isJava = getJavaExpression();
-		Expression isJavaEE = getJavaExpression();
+		Expression isJavaEE = getJavaEEExpression();
 
 		System.out.println("Does developer know Java Core: " + isJava.interpret("Java Core"));
 		System.out.println("Does developer know Java EE: " + isJavaEE.interpret("Java Spring"));

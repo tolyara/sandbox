@@ -19,7 +19,6 @@ public class Project {
 	public void load(Saver saver) {
 		version = saver.getVersion();
 		date = saver.getDate();
-		
 	}
 
 	@Override

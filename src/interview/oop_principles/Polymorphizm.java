@@ -16,7 +16,7 @@ class Car {
 	
 //	int seats = 4;
 	 
-	public int getSeats() {
+	public Number getSeats() {
 		return 4;
 	}
 
@@ -29,7 +29,7 @@ class Car {
 class ToyotaSupra extends Car {
 	
 	@Override
-	public int getSeats() {
+	public Integer getSeats() {
 		return 2;
 	}
 	
