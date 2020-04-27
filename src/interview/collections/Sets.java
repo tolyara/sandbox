@@ -8,6 +8,14 @@ import java.util.TreeSet;
 public class Sets {
 	
 	public static void main(String[] args) {
+		
+	}
+	
+	private static void m1() {
+
+	}
+	
+	private static void main() {
 	
 		Set<String> hashSet = new HashSet<>();
 		Set<String> linkedHashSet = new LinkedHashSet<>();

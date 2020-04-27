@@ -1,8 +1,10 @@
 package interview.lambda;
 
+import java.io.IOException;
+
 public class Runner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		Summator summator = new Summator() {
 			@Override

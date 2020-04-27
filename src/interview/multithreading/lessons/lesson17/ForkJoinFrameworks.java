@@ -13,7 +13,7 @@ public class ForkJoinFrameworks {
 		long var = 0;
 		
 		long start = System.currentTimeMillis();
-//		
+		
 //		for (long i = 0; i < numOfOperations; i++) {
 //			var += i;
 //		}

@@ -1,5 +1,8 @@
 package interview.alishev;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 public class Enums {
 
 	private static final int DOG = 0;
@@ -7,7 +10,15 @@ public class Enums {
 	private static final int FROG = 2;
 
 	public static void main(String[] args) {
-		withEnum();
+		enumSet();
+	}
+	
+	private static void enumSet() {
+		Set<Animal> set = EnumSet.of(Animal.CAT, Animal.DOG);
+		for (Animal element : set) {
+			System.out.println(element.getTranslation());
+		}		
+		System.out.println(set.getClass());
 	}
 
 	private static void withoutEnum() {

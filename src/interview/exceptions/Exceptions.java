@@ -4,7 +4,10 @@ public class Exceptions {
 
 	public static void main(String[] args) {
 //		System.out.println(getString());
-		test1();
+//		test1();
+		
+//		throw new IOError(new IOException());
+		
 	}
 
 	static String getString() {
@@ -17,7 +20,7 @@ public class Exceptions {
 //			return "catch";
 //		}
 		finally {
-//			return "finally";
+			return "finally";
 		}
 	}
 

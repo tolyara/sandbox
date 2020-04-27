@@ -9,5 +9,8 @@
 	<classpathentry kind="lib" path="C:/Users/Толянчик/git/sandbox/src/java_native_access/lib/jna-4.5.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Толянчик/git/sandbox/lib/lombok.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/Толянчик/git/sandbox/lib/postgresql-42.2.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Толянчик/git/sandbox/lib/sqlite-jdbc-3.30.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Толянчик/git/sandbox/lib/mysql-connector-java-8.0.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -8,8 +8,16 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Maps {
-
+	
 	public static void main(String[] args) {
+		
+	}
+	
+	private static void m1() {
+		Map<String, String> hashMap = new HashMap<>();
+	}
+
+	private static void doMain() {
 
 		Map<String, String> hashMap = new HashMap<>(); // initial size 16
 		Map<String, String> linkedHashMap = new LinkedHashMap<>();

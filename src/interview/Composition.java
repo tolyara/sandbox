@@ -9,8 +9,8 @@ public class Composition {
 
 	public static void main(String[] args) {
 
-//		MyHashSet<String> set = new MyHashSet<>();
-		MyHashSetCompositionStyle<String> set = new MyHashSetCompositionStyle<>();
+		MyHashSet<String> set = new MyHashSet<>();
+//		MyHashSetCompositionStyle<String> set = new MyHashSetCompositionStyle<>();
 		set.addAll(Arrays.asList("111", "222", "333"));
 		System.out.println(set.getCountOfAddedElements());
 
@@ -30,9 +30,14 @@ class MyHashSet<E> extends HashSet<E> {
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends E> c) {
-		countOfAddedElements += c.size();
-		return super.addAll(c);
+	public boolean addAll(Collection<? extends E> collection) {
+		countOfAddedElements += collection.size();
+		System.out.println("1 - " + countOfAddedElements);
+		
+		boolean isAllAdded = super.addAll(collection);
+		System.out.println("2 - " + countOfAddedElements);
+		
+		return isAllAdded;
 	}
 
 	public int getCountOfAddedElements() {
@@ -51,9 +56,9 @@ class MyHashSetCompositionStyle<E> {
 		return set.add(e);
 	}
 
-	public boolean addAll(Collection<? extends E> c) {
-		countOfAddedElements += c.size();
-		return set.addAll(c);
+	public boolean addAll(Collection<? extends E> collection) {
+		countOfAddedElements += collection.size();
+		return set.addAll(collection);
 	}
 
 	public int getCountOfAddedElements() {
