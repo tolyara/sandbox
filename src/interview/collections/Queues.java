@@ -53,7 +53,7 @@ public class Queues {
 		}
 	}
 
-	public static void main() {
+	private static void main() {
 
 		Queue<String> linkedList = new LinkedList<>();
 		Deque<String> linkedDeque = new LinkedList<>();

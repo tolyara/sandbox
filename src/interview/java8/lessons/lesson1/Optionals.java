@@ -17,7 +17,7 @@ public class Optionals {
 //			System.out.println(optional.get());
 //		}
 		
-		mapExample();	
+//		mapExample();	
 
 	}
 	

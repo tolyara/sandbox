@@ -10,9 +10,15 @@ public class Test1 {
 //		B1.m1();
 //		throw new Throwable();
 		
-		new Abst() {
-			
-		}.m1();;
+//		new Abst() {
+//		}.m1();;
+		
+//		System.out.println(Test1.class.getClassLoader());
+		
+		A1 a1 = new A1();
+//		B1 b1 = (B1) new A1(); 		ClassCastEx
+		a1.m2();
+		
 	}
 
 }
@@ -23,6 +29,10 @@ class A1 {
 		System.out.println("from A1");
 	}
 	
+	void m2() {
+		System.out.println("A1");
+	}
+	
 }
 
 class B1 extends A1 {
@@ -30,6 +40,12 @@ class B1 extends A1 {
 //	@Override
 	static void m1() {
 		System.out.println("from B1");
+	}
+	
+	@Override
+	void m2() {
+		System.out.println("B1");
+//		super.m2();
 	}
 	
 }

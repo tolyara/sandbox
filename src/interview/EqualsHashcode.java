@@ -10,7 +10,7 @@ public class EqualsHashcode {
 	
 	public static void main(String[] args) {
 		
-		doTest2();
+		doBook();
 		
 	}
 	
@@ -21,10 +21,14 @@ public class EqualsHashcode {
 		Book z = new Book("book z");
 		Book z1 = new Book(null);
 		
-		System.out.println(x.equals(x1));
-		System.out.println(x.equals(z));
-		System.out.println(x.equals(z1));
+//		System.out.println(x.equals(x1));
+//		System.out.println(x.equals(z));
+//		System.out.println(x.equals(z1));
 		
+		Object objectX = (Object) x;
+		Object objectX1 = (Object) x1;
+		
+		System.out.println(x == x1);
 	}
 	
 	static void doClassB() {
