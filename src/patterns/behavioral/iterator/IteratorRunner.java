@@ -14,6 +14,9 @@ public class IteratorRunner {
 			System.out.println(iterator.next().toString() + " ");
 		}
 		
+		
+		Iterable<T>
 	}
 	
 }
+

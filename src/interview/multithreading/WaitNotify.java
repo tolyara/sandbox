@@ -23,13 +23,17 @@ public class WaitNotify {
 				for (int i = 0; i < 5; i++) {
 					total++;
 					System.out.println(total + " - " + Thread.currentThread().getName());
-					try {
-						sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					trySleep();
 				}
 				lock.notify();
+			}
+		}
+		
+		private void trySleep() {
+			try {
+				sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 		

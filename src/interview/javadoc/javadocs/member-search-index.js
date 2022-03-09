@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"interview.javadoc","c":"JavaDocExample","l":"JavaDocExample()","url":"%3Cinit%3E()"},{"p":"interview.javadoc","c":"JavaDocExample","l":"main(String[])","url":"main(java.lang.String[])"},{"p":"interview.javadoc","c":"JavaDocExample","l":"myField"},{"p":"interview.javadoc","c":"OtherClass","l":"OtherClass()","url":"%3Cinit%3E()"}]

@@ -1,11 +1,17 @@
 package interview;
 
+import java.math.BigInteger;
+
 public class Wrappers {
 	
 	public static void main(String[] args) {
 		bool();
 		
 		Object o = new Object();
+	}
+	
+	private static void bigInt() {
+		BigInteger bigInteger = new BigInteger("0");
 	}
 	
 	private static void bool() {

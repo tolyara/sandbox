@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class Lists {
 	
@@ -21,6 +22,8 @@ public class Lists {
 		Map map = new HashMap(); 
 		map.put(map, "text"); 
 		System.out.println(map.get(map));
+		
+		Stack<String> stack = new Stack<String>();
 	}
 
 }

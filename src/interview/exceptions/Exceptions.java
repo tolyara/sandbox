@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Exceptions {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws IOException {
 //		System.out.println(getString());
 //		test1();
 
@@ -78,7 +78,7 @@ class Worker2 extends Person2 {
 
 	@Override
 //	void m1() throws IOException, SQLException { // compile error
-	void m1() throws IOException {
+	void m1() throws IOException, RuntimeException {
 		
 	}
 

@@ -13,6 +13,7 @@ create table product_photos (
 )
 
 insert into customers(name, phone, email) values ('Petr', '03', 'petr@gmail.com');
+insert into products(name, price) values ('headsets', 5000);
 
 select pp.* from product_photos pp left join products p on p.id = pp.product_id;
 
@@ -29,6 +30,10 @@ select c.name, carts.id as cart_id, cp.product_id, p.price from customers c left
 	left join cart_product cp on cp.cart_id = carts.id
     	left join products p on p.id = cp.product_id;
 
+
+select count(description) from products;
+
+
 // имена клиентов с общей суммой их заказов
 select c.name, sum(p.price) from customers c left join carts on carts.customer_id = c.id 
 	left join cart_product cp on cp.cart_id = carts.id
@@ -42,11 +47,26 @@ select c.name, coalesce(sum(p.price), 0) as orders_sum from customers c left joi
 			order by orders_sum desc;
 		------	having sum(p.price) > 0;
 
+// customer with highest id
+select id, name from customers where id = (select max(id) from customers);
+select id, name from customers order by id desc limit 1;
 
+// EXISTS operator returns true if the subquery returns one or more records
+select id, name from customers where id > 4 and exists (select * from customers where id = 1);
 
+// Indexes are used to retrieve data from the database more quickly than otherwise. 
+// Updating a table with indexes takes more time than updating a table without (because // the indexes also need an update). So, only create indexes on columns that will be // frequently searched against
+create index idx_name on products (name, description);
+drop index idx_name;
 
-
-
+// Triggers 
+CREATE TABLE product_history 
+(
+    id serial PRIMARY KEY,
+    product_id INT NOT NULL,
+    product_name VARCHAR(255),
+    operation VARCHAR(255) NOT NULL
+);
 
 
 

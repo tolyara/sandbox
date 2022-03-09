@@ -17,7 +17,7 @@ public class Phasers {
 		
 		Phaser phaser;
 		
-		static int carNumber = 4;
+		static int carNumber = 2;
 		
 		public Washer(Phaser phaser) {
 			this.phaser = phaser;
@@ -27,8 +27,8 @@ public class Phasers {
 		@Override
 		public void run() {	
 			for (int i = 0; i < carNumber; i++) {
-				System.out.println(getName() + " washing the car");
 				phaser.arriveAndAwaitAdvance();
+				System.out.println(getName() + " washing the car");
 			}
 		}
 		

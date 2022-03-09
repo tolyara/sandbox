@@ -5,6 +5,8 @@ public class Test1 {
 	static {
 //		System.out.println("qwerty");
 	}
+	
+	static char symbol;
 
 	public static void main(String[] args) throws Throwable {
 //		B1.m1();
@@ -15,10 +17,16 @@ public class Test1 {
 		
 //		System.out.println(Test1.class.getClassLoader());
 		
-		A1 a1 = new A1();
+//		A1 a1 = new A1();
 //		B1 b1 = (B1) new A1(); 		ClassCastEx
-		a1.m2();
+//		a1.m2();
 		
+//		A1 a1 = new A1();
+//		A1 a11 = a1;
+//		System.out.println(a1);
+//		System.out.println(a11);
+		
+		System.out.println(">" + symbol + "");
 	}
 
 }
