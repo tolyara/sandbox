@@ -15,11 +15,11 @@ public class ClassLoaders {
 
 }
 
-class MyLoader extends ClassLoader {
-
-	@Override
-	protected Class<?> findClass(String moduleName, String name) {		
-		return super.findClass(moduleName, name);
-	}
-	
-}
+//class MyLoader extends ClassLoader {
+//
+//	@Override
+//	protected Class<?> findClass(String moduleName, String name) {
+//		return super.findClass(moduleName, name);
+//	}
+//
+//}

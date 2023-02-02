@@ -31,10 +31,10 @@ public class Optionals {
 	
 	private static void  mapExample() {
 		Optional<String> optional = Optional.of("John");
-		System.out.println(optional.map((x) -> x.toUpperCase()).orElseThrow());
+//		System.out.println(optional.map((x) -> x.toUpperCase()).orElseThrow());
 		
 		Optional<String> optional2 = Optional.of("John");
-		System.out.println(optional2.flatMap((x) -> Optional.of("Sally")).orElseThrow());
+//		System.out.println(optional2.flatMap((x) -> Optional.of("Sally")).orElseThrow());
 	}
 
 	private static Optional<String> getOptional() {

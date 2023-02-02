@@ -1,22 +1,21 @@
 package interview.java8.lessons.suleimanov;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamApproachUtil {
 
     public static List<Specialist> getSpecialists() {
-        return List.of(
-                new Specialist("Ivan Ivanov", new BigDecimal(5000), Specialty.ENGINEER),
-                new Specialist("Alexander Alexandrov", new BigDecimal(4000), Specialty.ENGINEER),
-                new Specialist("Sergey Sergeev", new BigDecimal(3000), Specialty.DEVOPS),
-                new Specialist("Fedor Fedorov", new BigDecimal(2000), Specialty.DEVOPS),
-                new Specialist("Kirill Kirillov", new BigDecimal(10000), Specialty.MANAGER),
-                new Specialist("Petr Petrov", new BigDecimal(10000), Specialty.MANAGER)
-        );
+//        return List.of(
+//                new Specialist("Ivan Ivanov", new BigDecimal(5000), Specialty.ENGINEER),
+//                new Specialist("Alexander Alexandrov", new BigDecimal(4000), Specialty.ENGINEER),
+//                new Specialist("Sergey Sergeev", new BigDecimal(3000), Specialty.DEVOPS),
+//                new Specialist("Fedor Fedorov", new BigDecimal(2000), Specialty.DEVOPS),
+//                new Specialist("Kirill Kirillov", new BigDecimal(10000), Specialty.MANAGER),
+//                new Specialist("Petr Petrov", new BigDecimal(10000), Specialty.MANAGER)
+//        );
+        return new ArrayList<>();
     }
 
     // Поиск по специальности
