@@ -20,7 +20,14 @@ public class Conditions {
 		@Override
 		public void run() {
 			lock.lock();
+			System.out.println(getName() + ", AccountPlus start increase ... " + account);
 			account += 10;
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println(getName() + ", AccountPlus finish increase ... " + account);
 			condition.signal();
 			lock.unlock();
 		}
