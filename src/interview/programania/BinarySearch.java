@@ -21,8 +21,16 @@ public class BinarySearch {
         list.add(19);
 
         Collections.sort(list);
-        int index = Collections.binarySearch(list, 12);  // should be 8
+//        int index = Collections.binarySearch(list, 12);  // should be 8
+        int index = Collections.binarySearch(list, 100);  // should not be found
         System.out.println(index);
+
+        System.out.println();
+        System.out.println(list);
+        Collections.reverse(list);
+        System.out.println(list);
+        Collections.shuffle(list);
+        System.out.println(list);
     }
 
 }
