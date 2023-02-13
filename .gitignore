@@ -1,10 +1,10 @@
 /bin/
+/sandbox.iml
+/.idea/modules.xml
+/.idea/misc.xml
+/.idea/runConfigurations.xml
+/.idea/vcs.xml
 
 *.class
 *.html
 /.idea/compiler.xml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/runConfigurations.xml
-/sandbox.iml
-/.idea/vcs.xml

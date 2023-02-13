@@ -1,8 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+/libraries/jna_3_0_9.xml
+/libraries/lombok.xml
