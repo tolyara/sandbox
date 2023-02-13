@@ -2,3 +2,9 @@
 
 *.class
 *.html
+/.idea/compiler.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/runConfigurations.xml
+/sandbox.iml
+/.idea/vcs.xml
