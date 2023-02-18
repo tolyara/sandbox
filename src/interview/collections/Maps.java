@@ -39,7 +39,7 @@ public class Maps {
 	}
 
 	private static void weakHashMap() throws InterruptedException {
-		Map map;
+		Map<String, String> map;
 
 		map = new WeakHashMap<>();
 //		map = new HashMap<>();
