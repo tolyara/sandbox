@@ -41,12 +41,14 @@ public class ForkJoinFrameworks {
 		@Override
 		protected Long compute() {			
 			if ((to - from) <= numOfOperations/numOfProcessorCores) {
+				System.out.println("Computing, numOfOperations = " + numOfOperations + ", from = " + from + ", to = " + to);
 				long var = 0;
 				for (long i = from; i < to; i++) {
 					var += i;
 				}
 				return var;
 			} else {
+				System.out.println("Forking, numOfOperations = " + numOfOperations + ", from = " + from + ", to = " + to);
 				long middle = (to + from)/2;
 				MyFork firstHalf = new MyFork(from, middle);
 				firstHalf.fork();
