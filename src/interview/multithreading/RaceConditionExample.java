@@ -5,11 +5,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RaceConditionExample {
 
     public static void main(String[] args) {
-        Counter counter = new Counter();
-        MyThread t1 = new MyThread(counter, 100);
-        MyThread t2 = new MyThread(counter, 100);
-        t1.start();
-        t2.start();
+        Counter counter = new Counter();  // Critical section, shared resource
+        int iteration = 100;
+
+        for (int i = 0; i < iteration; i++) {
+            MyThread t1 = new MyThread(counter, 100);
+            MyThread t2 = new MyThread(counter, 100);
+            t1.start();
+            t2.start();
+        }
+
+//        Counter counter = new Counter();
+//        MyThread t1 = new MyThread(counter, 100);
+//        MyThread t2 = new MyThread(counter, 100);
+//        t1.start();
+//        t2.start();
     }
 
 }
@@ -43,12 +53,14 @@ class MyThread extends Thread {
 
     @Override
     public void run() {
-//        synchronized (counter) {                  // use synchronization to synchronize output
-            for (int i = 0; i < iteration; i++) {
+        synchronized (counter) {                  // use synchronization to synchronize work with counter
+
+//            for (int i = 0; i < iteration; i++) {
                 counter.increment();
                 System.out.println(" Count = " + counter.getCount() + " " + this.getName());
-            }
-//        }
+//            }
+
+        }
     }
 
 }
