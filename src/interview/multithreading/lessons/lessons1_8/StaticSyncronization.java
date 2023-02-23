@@ -40,6 +40,7 @@ class Resource {
 
 	static int var;
 
+//	public static synchronized void incrementVar() {
 	public static void incrementVar() {
 		synchronized (Resource.class) {
 			int i = var;
