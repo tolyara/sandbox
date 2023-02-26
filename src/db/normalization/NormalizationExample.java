@@ -1,6 +1,7 @@
 package db.normalization;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class NormalizationExample {
@@ -114,6 +115,39 @@ public class NormalizationExample {
         employeeProjects.add(new EmployeeProjects(4, 2));
     }
 
+    /*
+        Multivalued dependencies are eliminated
+    */
+    public static void fourthForm() {
+        // problem: one employee has many projects and many hobbies but projects and hobbies are independent things
+
+        // before
+        Collection<EmployeeProjects> employeeProjectsRaw = new ArrayList<>();
+        employeeProjectsRaw.add(new EmployeeProjects(1, "Vlasov Anton", 1, "Reshala", "toys"));
+        employeeProjectsRaw.add(new EmployeeProjects(1, "Vlasov Anton", 2, "Izmeny", "cars"));
+        employeeProjectsRaw.add(new EmployeeProjects(2, "VKhovansky Yura", 1, "Reshala", "alcohol"));
+        employeeProjectsRaw.add(new EmployeeProjects(2, "VKhovansky Yura", 3, "Serdtsa za lubov", "guitar"));
+        employeeProjectsRaw.add(new EmployeeProjects(3, "Oneshko Yulik", 2, "Izmeny", "electronics"));
+        employeeProjectsRaw.add(new EmployeeProjects(3, "Oneshko Yulik", 3, "Serdtsa za lubov", "cars"));
+
+        // after
+        Collection<EmployeeProjects> employeeProjects = new ArrayList<>();
+        employeeProjects.add(new EmployeeProjects(1, 1));
+        employeeProjects.add(new EmployeeProjects(1, 2));
+        employeeProjects.add(new EmployeeProjects(2, 1));
+        employeeProjects.add(new EmployeeProjects(2, 3));
+        employeeProjects.add(new EmployeeProjects(3, 2));
+        employeeProjects.add(new EmployeeProjects(3, 3));
+
+        Collection<Employee> employees = new ArrayList<>(); // hobbies can be also moved to a separate table
+        employees.add(new Employee("Vlasov Anton", "toys"));
+        employees.add(new Employee("Vlasov Anton", "cars"));
+        employees.add(new Employee("VKhovansky Yura", "alcohol"));
+        employees.add(new Employee("VKhovansky Yura", "guitar"));
+        employees.add(new Employee("Oneshko Yulik", "electronics"));
+        employees.add(new Employee("Oneshko Yulik", "cars"));
+    }
+
 }
 
 class Employee {
@@ -155,6 +189,7 @@ class EmployeeProjects {
     private String name;
     private String project;
     private String projectClient;
+    private String hobbies;
 
     public EmployeeProjects(int employeeId, int projectId, String name, String project, String projectClient) {
         this.employeeId = employeeId;
@@ -167,6 +202,14 @@ class EmployeeProjects {
     public EmployeeProjects(int employeeId, int projectId) {
         this.employeeId = employeeId;
         this.projectId = projectId;
+    }
+
+    public EmployeeProjects(int employeeId, String name, int projectId, String project, String hobbies) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.projectId = projectId;
+        this.project = project;
+        this.hobbies = hobbies;
     }
 
 }
