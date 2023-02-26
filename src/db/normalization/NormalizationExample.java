@@ -26,7 +26,7 @@ public class NormalizationExample {
         employees.add(new Employee("Suvorov Alex", "skates"));
         employees.add(new Employee("Suvorov Alex", "motorcycle"));
         employees.add(new Employee("Ivanov Illya", "drawing"));
-        employees.add(new Employee("Ivanov Illya", "drawing"));
+        employees.add(new Employee("Ivanov Illya", "playstation"));
         employees.add(new Employee("Vlasov Anton", "toys"));
         employees.add(new Employee("Vlasov Anton", "cars"));
         employees.add(new Employee("Gridin Kuzma", "games"));
@@ -49,7 +49,7 @@ public class NormalizationExample {
         List<Employee> employees = new ArrayList<>();
         employees.add(new Employee(1, "Vlasov Anton"));
         employees.add(new Employee(2, "Khovansky Yura"));
-        employees.add(new Employee(1, "Oneshko Yulik"));
+        employees.add(new Employee(3, "Oneshko Yulik"));
 
         List<Project> projects = new ArrayList<>();
         projects.add(new Project(1, "Reshala", "Coca Cola"));
@@ -86,6 +86,34 @@ public class NormalizationExample {
         addresses.add(new Address(3, "Devyatkino", "+33333"));
     }
 
+    /*
+        Boyce-Codd normal form
+        Key attributes must not depend on non-key attributes
+     */
+    public static void thirdFormEnhanced() {
+        // before
+        List<ProjectTasks> projectTasksList = new ArrayList<>();
+        projectTasksList.add(new ProjectTasks(1, "video filming", "Vlasov Anton"));
+        projectTasksList.add(new ProjectTasks(1, "video editing", "Petr Korneev"));
+        projectTasksList.add(new ProjectTasks(2, "video filming", "Vlasov Anton"));
+        projectTasksList.add(new ProjectTasks(2, "video filming", "Oneshko Yulik"));
+        projectTasksList.add(new ProjectTasks(2, "video editing", "Egor FromGor"));
+
+        // after
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, "Vlasov Anton", "video filming"));
+        employees.add(new Employee(2, "Petr Korneev", "video editing"));
+        employees.add(new Employee(3, "Oneshko Yulik", "video filming"));
+        employees.add(new Employee(4, "Egor FromGor", "video editing"));
+
+        List<EmployeeProjects> employeeProjects = new ArrayList<>();
+        employeeProjects.add(new EmployeeProjects(1, 1));
+        employeeProjects.add(new EmployeeProjects(2, 1));
+        employeeProjects.add(new EmployeeProjects(1, 2));
+        employeeProjects.add(new EmployeeProjects(3, 2));
+        employeeProjects.add(new EmployeeProjects(4, 2));
+    }
+
 }
 
 class Employee {
@@ -94,6 +122,7 @@ class Employee {
     private String name;
     private String hobbies;
     private int addressId;
+    private String skill;
 
     public Employee(String name, String hobbies) {
         this.name = name;
@@ -109,6 +138,12 @@ class Employee {
         this.employeeId = employeeId;
         this.name = name;
         this.addressId = addressId;
+    }
+
+    public Employee(int employeeId, String name, String skill) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.skill = skill;
     }
 
 }
@@ -177,6 +212,20 @@ class Address {
         this.addressId = addressId;
         this.address = address;
         this.phone = phone;
+    }
+
+}
+
+class ProjectTasks {
+
+    private int projectId;
+    private String task;
+    private String responsibleEmployee;
+
+    public ProjectTasks(int projectId, String task, String responsibleEmployee) {
+        this.projectId = projectId;
+        this.task = task;
+        this.responsibleEmployee = responsibleEmployee;
     }
 
 }
