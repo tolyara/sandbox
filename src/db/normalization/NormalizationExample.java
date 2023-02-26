@@ -35,7 +35,7 @@ public class NormalizationExample {
 
     /*
        1) There is a primary key in the table
-       2) All attributes depend on the primary key as a whole, and not on any part of it.
+       2) All attributes depend on the primary key as a whole and not on any part of it
     */
     public static void secondForm() {
         // before
@@ -63,12 +63,27 @@ public class NormalizationExample {
     }
 
     /*
-
+        All attributes depend on the primary key and not on any other attributes
      */
     public static void thirdForm() {
         // before
+        List<EmployeeAddresses> employeeAddressesList = new ArrayList<>();
+        employeeAddressesList.add(new EmployeeAddresses(1, "Vlasov Anton", "Shushary", "+11111"));
+        employeeAddressesList.add(new EmployeeAddresses(2, "Khovansky Yura", "Vykhino", "+22222"));
+        employeeAddressesList.add(new EmployeeAddresses(3, "Oneshko Yulik", "Devyatkino", "+33333"));
+        employeeAddressesList.add(new EmployeeAddresses(4, "Gridin Kuzma", "Shushary", "+11111"));
 
         // after
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, "Vlasov Anton", 1));
+        employees.add(new Employee(2, "Khovansky Yura", 2));
+        employees.add(new Employee(3, "Oneshko Yulik", 3));
+        employees.add(new Employee(4, "Gridin Kuzma", 1));
+
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(new Address(1, "Shushary", "+11111"));
+        addresses.add(new Address(2, "Vykhino", "+22222"));
+        addresses.add(new Address(3, "Devyatkino", "+33333"));
     }
 
 }
@@ -78,6 +93,7 @@ class Employee {
     private int employeeId;
     private String name;
     private String hobbies;
+    private int addressId;
 
     public Employee(String name, String hobbies) {
         this.name = name;
@@ -87,6 +103,12 @@ class Employee {
     public Employee(int employeeId, String name) {
         this.employeeId = employeeId;
         this.name = name;
+    }
+
+    public Employee(int employeeId, String name, int addressId) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.addressId = addressId;
     }
 
 }
@@ -124,6 +146,37 @@ class Project {
         this.projectId = projectId;
         this.project = project;
         this.projectClient = projectClient;
+    }
+
+}
+
+class EmployeeAddresses {
+
+    private int employeeId;
+    private String name;
+    private int addressId;
+    private String address;
+    private String phone;
+
+    public EmployeeAddresses(int employeeId, String name, String address, String phone) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+
+}
+
+class Address {
+
+    private int addressId;
+    private String address;
+    private String phone;
+
+    public Address(int addressId, String address, String phone) {
+        this.addressId = addressId;
+        this.address = address;
+        this.phone = phone;
     }
 
 }
