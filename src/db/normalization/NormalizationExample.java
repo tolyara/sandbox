@@ -17,17 +17,17 @@ public class NormalizationExample {
     public static void firstForm() {
         // before
         List<Employee> employeesRaw = new ArrayList<>();
-        employeesRaw.add(new Employee("Suvorov Alex", "skates, motorcycle"));
-        employeesRaw.add(new Employee("Ivanov Illya", "drawing, playstation"));
+        employeesRaw.add(new Employee("Tushentsov Ruslan", "skates, motorcycle"));
+        employeesRaw.add(new Employee("Oneshko Yulik", "drawing, playstation"));
         employeesRaw.add(new Employee("Vlasov Anton", "toys, cars"));
         employeesRaw.add(new Employee("Gridin Kuzma", "games, photo"));
 
         // after
         List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee("Suvorov Alex", "skates"));
-        employees.add(new Employee("Suvorov Alex", "motorcycle"));
-        employees.add(new Employee("Ivanov Illya", "drawing"));
-        employees.add(new Employee("Ivanov Illya", "playstation"));
+        employees.add(new Employee("Tushentsov Ruslan", "skates"));
+        employees.add(new Employee("Tushentsov Ruslan", "motorcycle"));
+        employees.add(new Employee("Oneshko Yulik", "drawing"));
+        employees.add(new Employee("Oneshko Yulik", "playstation"));
         employees.add(new Employee("Vlasov Anton", "toys"));
         employees.add(new Employee("Vlasov Anton", "cars"));
         employees.add(new Employee("Gridin Kuzma", "games"));
@@ -148,6 +148,43 @@ public class NormalizationExample {
         employees.add(new Employee("Oneshko Yulik", "cars"));
     }
 
+    /*
+        Non-trivial dependencies are eliminated (decomposition without losses)
+    */
+    public static void fifthForm() {
+        // before
+        List<ProjectTasks> projectTasksList = new ArrayList<>();
+        projectTasksList.add(new ProjectTasks(1, "Reshala","video filming", "Vlasov Anton"));
+        projectTasksList.add(new ProjectTasks(1, "Reshala","video editing", "Khovansky Yura"));
+        projectTasksList.add(new ProjectTasks(2, "Serdtsa za lubov","advertising", "Khovansky Yura"));
+        projectTasksList.add(new ProjectTasks(3, "Izmeny","video editing", "Oneshko Yulik"));
+        projectTasksList.add(new ProjectTasks(3, "Izmeny","video filming", "Vlasov Anton"));
+        projectTasksList.add(new ProjectTasks(4, "Nemnozhko razvedeny","video filming", "Vlasov Anton"));
+
+        // after
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, "Vlasov Anton", "video filming"));
+        employees.add(new Employee(2, "Khovansky Yura", "video editing"));
+        employees.add(new Employee(2, "Khovansky Yura", "advertising"));
+        employees.add(new Employee(3, "Oneshko Yulik", "video editing"));
+
+        List<EmployeeProjects> employeeProjects = new ArrayList<>();
+        employeeProjects.add(new EmployeeProjects(1, 1));
+        employeeProjects.add(new EmployeeProjects(2, 1));
+        employeeProjects.add(new EmployeeProjects(2, 2));
+        employeeProjects.add(new EmployeeProjects(3, 3));
+        employeeProjects.add(new EmployeeProjects(1, 3));
+        employeeProjects.add(new EmployeeProjects(1, 4));
+
+        List<ProjectTasks> projectTasks = new ArrayList<>();
+        projectTasks.add(new ProjectTasks(1, "Reshala").setTask("video filming"));
+        projectTasks.add(new ProjectTasks(1, "Reshala").setTask("video editing"));
+        projectTasks.add(new ProjectTasks(2, "Serdtsa za lubov").setTask("advertising"));
+        projectTasks.add(new ProjectTasks(3, "Izmeny").setTask("video editing"));
+        projectTasks.add(new ProjectTasks(3, "Izmeny").setTask("video filming"));
+        projectTasks.add(new ProjectTasks(4, "Nemnozhko razvedeny").setTask("video filming"));
+    }
+
 }
 
 class Employee {
@@ -262,6 +299,7 @@ class Address {
 class ProjectTasks {
 
     private int projectId;
+    private String project;
     private String task;
     private String responsibleEmployee;
 
@@ -269,6 +307,23 @@ class ProjectTasks {
         this.projectId = projectId;
         this.task = task;
         this.responsibleEmployee = responsibleEmployee;
+    }
+
+    public ProjectTasks(int projectId, String project, String task, String responsibleEmployee) {
+        this.projectId = projectId;
+        this.task = task;
+        this.responsibleEmployee = responsibleEmployee;
+        this.project = project;
+    }
+
+    public ProjectTasks(int projectId, String project) {
+        this.projectId = projectId;
+        this.project = project;
+    }
+
+    public ProjectTasks setTask(String task) {
+        this.task = task;
+        return this;
     }
 
 }
