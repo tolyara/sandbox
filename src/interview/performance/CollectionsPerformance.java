@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 public class CollectionsPerformance {
 
@@ -57,16 +59,17 @@ public class CollectionsPerformance {
     }
 
     private static void testListsRemove(List<String> linkedList, List<String> arrayList, Consumer<List<String>> consumer) {
-        fillList(linkedList);
-        fillList(arrayList);
+        UnaryOperator<List<String>> listFiller = (list) -> {
+            for (int i = 0; i < iterations; i++) {
+                list.add(String.valueOf(i));
+            }
+            return list;
+        };
+        linkedList = listFiller.apply(linkedList);
+        arrayList = listFiller.apply(arrayList);
+
         process(linkedList, "linked", consumer);
         process(arrayList, "array", consumer);
-    }
-
-    private static void fillList(List<String> list) {
-        for (int i = 0; i < iterations; i++) {
-            list.add(String.valueOf(i));
-        }
     }
 
     private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
