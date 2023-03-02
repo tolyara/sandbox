@@ -8,15 +8,16 @@ import java.util.function.Consumer;
 public class CollectionsPerformance {
 
 //    private static final int iterations = 2_000_000;
-    private static final int iterations = 200_000;
+//    private static final int iterations = 200_000;
+    private static final int iterations = 20_000;
 
     private static final String str = "Hello";
 
     public static void main(String[] args) {
 
 
-//        testListsRemoveFromBegin();
-        testListsRemoveFromEnd();
+        testListsRemoveFromBegin();
+//        testListsRemoveFromEnd();
     }
 
     /*
@@ -32,18 +33,7 @@ public class CollectionsPerformance {
                 list.remove(0);
             }
         };
-
-        List<String> linkedList = new LinkedList<>();
-        for (int i = 0; i < iterations; i++) {
-            linkedList.add(String.valueOf(i));
-        }
-        process(linkedList, "linked", removerFromBegin);
-
-        List<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < iterations; i++) {
-            arrayList.add(String.valueOf(i));
-        }
-        process(arrayList, "array", removerFromBegin);
+        testListsRemove(new LinkedList<>(), new ArrayList<>(), removerFromBegin);
     }
 
     /*
@@ -63,21 +53,20 @@ public class CollectionsPerformance {
                 list.remove(list.size() - 1);
             }
         };
-
-        List<String> linkedList = new LinkedList<>();
-        for (int i = 0; i < iterations; i++) {
-            linkedList.add(String.valueOf(i));
-        }
-        List<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < iterations; i++) {
-            arrayList.add(String.valueOf(i));
-        }
-        testListsRemove(linkedList, arrayList, removerFromEnd);
+        testListsRemove(new LinkedList<>(), new ArrayList<>(), removerFromEnd);
     }
 
     private static void testListsRemove(List<String> linkedList, List<String> arrayList, Consumer<List<String>> consumer) {
+        fillList(linkedList);
+        fillList(arrayList);
         process(linkedList, "linked", consumer);
         process(arrayList, "array", consumer);
+    }
+
+    private static void fillList(List<String> list) {
+        for (int i = 0; i < iterations; i++) {
+            list.add(String.valueOf(i));
+        }
     }
 
     private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
