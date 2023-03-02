@@ -8,9 +8,9 @@ import java.util.function.UnaryOperator;
 
 public class CollectionsPerformance {
 
-    private static final int iterations = 2_000_000;
+//    private static final int iterations = 2_000_000;
 //    private static final int iterations = 200_000;
-//    private static final int iterations = 20_000;
+    private static final int iterations = 20_000;
 
     private static final String str = "Hello";
 
@@ -22,8 +22,8 @@ public class CollectionsPerformance {
     };
 
     public static void main(String[] args) {
-//        testListsInsertToBegin();
-        testListsInsertToEnd();
+        testListsInsertToBegin();
+//        testListsInsertToEnd();
 
 //        testListsRemoveFromBegin();
 //        testListsRemoveFromEnd();
@@ -92,21 +92,28 @@ public class CollectionsPerformance {
         // linked : 9
         // array : 5258
 
-        long start = System.currentTimeMillis();
-        List<String> linkedList = new LinkedList<>();
-        for (int i = 0; i < iterations; i++) {
-            linkedList.add(0, str);
-        }
-        long finish = System.currentTimeMillis();
-        System.out.println("linked : " + (finish - start));
+        Consumer<List<String>> inserterToBegin = (list) -> {
+            for (int i = 0; i < iterations; i++) {
+                list.add(0, str);
+            }
+        };
+        testLists(new LinkedList<>(), new ArrayList<>(), list -> list, inserterToBegin);
 
-        start = System.currentTimeMillis();
-        List<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < iterations; i++) {
-            arrayList.add(0, str);
-        }
-        finish = System.currentTimeMillis();
-        System.out.println("array : " + (finish - start));
+//        long start = System.currentTimeMillis();
+//        List<String> linkedList = new LinkedList<>();
+//        for (int i = 0; i < iterations; i++) {
+//            linkedList.add(0, str);
+//        }
+//        long finish = System.currentTimeMillis();
+//        System.out.println("linked : " + (finish - start));
+//
+//        start = System.currentTimeMillis();
+//        List<String> arrayList = new ArrayList<>();
+//        for (int i = 0; i < iterations; i++) {
+//            arrayList.add(0, str);
+//        }
+//        finish = System.currentTimeMillis();
+//        System.out.println("array : " + (finish - start));
     }
 
     /*
