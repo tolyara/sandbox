@@ -8,12 +8,15 @@ import java.util.function.Consumer;
 public class CollectionsPerformance {
 
 //    private static final int iterations = 2_000_000;
-    private static final int iterations = 20_000;
+    private static final int iterations = 200_000;
 
     private static final String str = "Hello";
 
     public static void main(String[] args) {
-        testListsRemoveFromBegin();
+
+
+//        testListsRemoveFromBegin();
+        testListsRemoveFromEnd();
     }
 
     /*
@@ -43,15 +46,45 @@ public class CollectionsPerformance {
         process(arrayList, "array", removerFromBegin);
     }
 
+    /*
+        LinkedList has a little advantage
+     */
+    private static void testListsRemoveFromEnd() {
+        // iterations - 20_000
+        // linked : 4   8   3
+        // array  : 3   2   3
+
+        // iterations - 200_000
+        // linked : 12   16   13
+        // array  : 24   24   22
+
+        Consumer<List<String>> removerFromEnd = (list) -> {
+            while (!list.isEmpty()) {
+                list.remove(list.size() - 1);
+            }
+        };
+
+        List<String> linkedList = new LinkedList<>();
+        for (int i = 0; i < iterations; i++) {
+            linkedList.add(String.valueOf(i));
+        }
+        List<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < iterations; i++) {
+            arrayList.add(String.valueOf(i));
+        }
+        testListsRemove(linkedList, arrayList, removerFromEnd);
+    }
+
+    private static void testListsRemove(List<String> linkedList, List<String> arrayList, Consumer<List<String>> consumer) {
+        process(linkedList, "linked", consumer);
+        process(arrayList, "array", consumer);
+    }
+
     private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
         long start = System.currentTimeMillis();
         consumer.accept(list);
         long finish = System.currentTimeMillis();
         System.out.println(listName + " : " + (finish - start));
-    }
-
-    private static void testListsRemoveFromEnd() {
-
     }
 
     /*
