@@ -65,21 +65,6 @@ public class CollectionsPerformance {
         testLists(new LinkedList<>(), new ArrayList<>(), listFiller, removerFromEnd);
     }
 
-    private static void testLists(List<String> linkedList, List<String> arrayList,
-                                  UnaryOperator<List<String>> listFiller, Consumer<List<String>> targetOperation) {
-        linkedList = listFiller.apply(linkedList);
-        arrayList = listFiller.apply(arrayList);
-        process(linkedList, "linked", targetOperation);
-        process(arrayList, "array", targetOperation);
-    }
-
-    private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
-        long start = System.currentTimeMillis();
-        consumer.accept(list);
-        long finish = System.currentTimeMillis();
-        System.out.println(listName + " : " + (finish - start));
-    }
-
     /*
         LinkedList wins
      */
@@ -98,22 +83,6 @@ public class CollectionsPerformance {
             }
         };
         testLists(new LinkedList<>(), new ArrayList<>(), list -> list, inserterToBegin);
-
-//        long start = System.currentTimeMillis();
-//        List<String> linkedList = new LinkedList<>();
-//        for (int i = 0; i < iterations; i++) {
-//            linkedList.add(0, str);
-//        }
-//        long finish = System.currentTimeMillis();
-//        System.out.println("linked : " + (finish - start));
-//
-//        start = System.currentTimeMillis();
-//        List<String> arrayList = new ArrayList<>();
-//        for (int i = 0; i < iterations; i++) {
-//            arrayList.add(0, str);
-//        }
-//        finish = System.currentTimeMillis();
-//        System.out.println("array : " + (finish - start));
     }
 
     /*
@@ -130,6 +99,21 @@ public class CollectionsPerformance {
             }
         };
         testLists(new LinkedList<>(), new ArrayList<>(), list -> list, inserterToEnd);
+    }
+
+    private static void testLists(List<String> linkedList, List<String> arrayList,
+                                  UnaryOperator<List<String>> listFiller, Consumer<List<String>> targetOperation) {
+        linkedList = listFiller.apply(linkedList);
+        arrayList = listFiller.apply(arrayList);
+        process(linkedList, "linked", targetOperation);
+        process(arrayList, "array", targetOperation);
+    }
+
+    private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
+        long start = System.currentTimeMillis();
+        consumer.accept(list);
+        long finish = System.currentTimeMillis();
+        System.out.println(listName + " : " + (finish - start));
     }
 
 }
