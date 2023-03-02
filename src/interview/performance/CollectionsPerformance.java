@@ -3,6 +3,7 @@ package interview.performance;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class CollectionsPerformance {
 
@@ -23,27 +24,28 @@ public class CollectionsPerformance {
         // linked : 8   5   3
         // array  : 46  48  49
 
-        // iterations - 200_000
-        // linked :
-        // array  :
+        Consumer<List<String>> removerFromBegin = (list) -> {
+            while (!list.isEmpty()) {
+                list.remove(0);
+            }
+        };
+
         List<String> linkedList = new LinkedList<>();
         for (int i = 0; i < iterations; i++) {
             linkedList.add(String.valueOf(i));
         }
-        removeFromBegin(linkedList, "linked");
+        removeFromBegin(linkedList, "linked", removerFromBegin);
 
         List<String> arrayList = new ArrayList<>();
         for (int i = 0; i < iterations; i++) {
             arrayList.add(String.valueOf(i));
         }
-        removeFromBegin(arrayList, "array");
+        removeFromBegin(arrayList, "array", removerFromBegin);
     }
 
-    private static void removeFromBegin(List<String> list, String listName) {
+    private static void removeFromBegin(List<String> list, String listName, Consumer<List<String>> consumer) {
         long start = System.currentTimeMillis();
-        while (!list.isEmpty()) {
-            list.remove(0);
-        }
+        consumer.accept(list);
         long finish = System.currentTimeMillis();
         System.out.println(listName + " : " + (finish - start));
     }
