@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class CollectionsPerformance {
@@ -15,9 +14,14 @@ public class CollectionsPerformance {
 
     private static final String str = "Hello";
 
+    private static final UnaryOperator<List<String>> listFiller = (list) -> {
+        for (int i = 0; i < iterations; i++) {
+            list.add(String.valueOf(i));
+        }
+        return list;
+    };
+
     public static void main(String[] args) {
-
-
         testListsRemoveFromBegin();
 //        testListsRemoveFromEnd();
     }
@@ -35,7 +39,7 @@ public class CollectionsPerformance {
                 list.remove(0);
             }
         };
-        testListsRemove(new LinkedList<>(), new ArrayList<>(), removerFromBegin);
+        testLists(new LinkedList<>(), new ArrayList<>(), listFiller, removerFromBegin);
     }
 
     /*
@@ -55,21 +59,15 @@ public class CollectionsPerformance {
                 list.remove(list.size() - 1);
             }
         };
-        testListsRemove(new LinkedList<>(), new ArrayList<>(), removerFromEnd);
+        testLists(new LinkedList<>(), new ArrayList<>(), listFiller, removerFromEnd);
     }
 
-    private static void testListsRemove(List<String> linkedList, List<String> arrayList, Consumer<List<String>> consumer) {
-        UnaryOperator<List<String>> listFiller = (list) -> {
-            for (int i = 0; i < iterations; i++) {
-                list.add(String.valueOf(i));
-            }
-            return list;
-        };
+    private static void testLists(List<String> linkedList, List<String> arrayList,
+                                  UnaryOperator<List<String>> listFiller, Consumer<List<String>> targetOperation) {
         linkedList = listFiller.apply(linkedList);
         arrayList = listFiller.apply(arrayList);
-
-        process(linkedList, "linked", consumer);
-        process(arrayList, "array", consumer);
+        process(linkedList, "linked", targetOperation);
+        process(arrayList, "array", targetOperation);
     }
 
     private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
