@@ -34,16 +34,16 @@ public class CollectionsPerformance {
         for (int i = 0; i < iterations; i++) {
             linkedList.add(String.valueOf(i));
         }
-        removeFromBegin(linkedList, "linked", removerFromBegin);
+        process(linkedList, "linked", removerFromBegin);
 
         List<String> arrayList = new ArrayList<>();
         for (int i = 0; i < iterations; i++) {
             arrayList.add(String.valueOf(i));
         }
-        removeFromBegin(arrayList, "array", removerFromBegin);
+        process(arrayList, "array", removerFromBegin);
     }
 
-    private static void removeFromBegin(List<String> list, String listName, Consumer<List<String>> consumer) {
+    private static void process(List<String> list, String listName, Consumer<List<String>> consumer) {
         long start = System.currentTimeMillis();
         consumer.accept(list);
         long finish = System.currentTimeMillis();
