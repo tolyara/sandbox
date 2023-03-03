@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
+/**
+ *      Summary results:                        LinkedList  |   ArrayList
+ *      removing  (begin, middle, end)           +  -  +=        -  +  -=
+ *      insertion (begin, middle, end)           +  -  -=        -  +  +=
+ */
 public class CollectionsPerformance {
 
 //    private static final int iterations = 2_000_000;
