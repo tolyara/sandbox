@@ -10,12 +10,13 @@ import java.util.function.UnaryOperator;
  *      Summary results:                        LinkedList  |   ArrayList
  *      removing  (begin, middle, end)           +  -  +=        -  +  -=
  *      insertion (begin, middle, end)           +  -  -=        -  +  +=
+ *      getting   (begin, middle, end)           =  -   =        =  +   =
  */
 public class CollectionsPerformance {
 
-    private static final int iterations = 2_000_000;
+//    private static final int iterations = 2_000_000;
 //    private static final int iterations = 200_000;
-//    private static final int iterations = 20_000;
+    private static final int iterations = 20_000;
 
     private static final String str = "Hello";
 
@@ -36,7 +37,8 @@ public class CollectionsPerformance {
 //        testListsRemoveFromEnd();
 
 //        testListsGetFirstElement();
-        testListsGetLastElement();
+        testListsGetMiddleElement();
+//        testListsGetLastElement();
     }
 
     /*
@@ -180,6 +182,22 @@ public class CollectionsPerformance {
             }
         };
         testLists(new LinkedList<>(), new ArrayList<>(), listFiller, lastElementGetter);
+    }
+
+    /*
+        ArrayList wins
+    */
+    private static void testListsGetMiddleElement() {
+        // iterations - 20_000
+        // linked : 272 309 283
+        //  array : 2   1   1
+
+        Consumer<List<String>> middleElementGetter = (list) -> {
+            for (int i = 0; i < iterations; i++) {
+                list.get(i);
+            }
+        };
+        testLists(new LinkedList<>(), new ArrayList<>(), listFiller, middleElementGetter);
     }
 
     private static void testLists(List<String> linkedList, List<String> arrayList,
