@@ -13,8 +13,8 @@ import java.util.function.UnaryOperator;
  */
 public class CollectionsPerformance {
 
-//    private static final int iterations = 2_000_000;
-    private static final int iterations = 200_000;
+    private static final int iterations = 2_000_000;
+//    private static final int iterations = 200_000;
 //    private static final int iterations = 20_000;
 
     private static final String str = "Hello";
@@ -32,8 +32,11 @@ public class CollectionsPerformance {
 //        testListsInsertToEnd();
 
 //        testListsRemoveFromBegin();
-        testListsRemoveFromMiddle();
+//        testListsRemoveFromMiddle();
 //        testListsRemoveFromEnd();
+
+//        testListsGetFirstElement();
+        testListsGetLastElement();
     }
 
     /*
@@ -146,6 +149,37 @@ public class CollectionsPerformance {
             }
         };
         testLists(new LinkedList<>(), new ArrayList<>(), list -> list, inserterToEnd);
+    }
+
+    /*
+        Parity
+    */
+    private static void testListsGetFirstElement() {
+        // iterations - 2_000_000
+        // linked : 5   4   5
+        //  array : 5   6   5
+        Consumer<List<String>> firstElementGetter = (list) -> {
+            for (int i = 0; i < iterations; i++) {
+                list.get(0);
+            }
+        };
+        testLists(new LinkedList<>(), new ArrayList<>(), listFiller, firstElementGetter);
+    }
+
+    /*
+        Parity
+    */
+    private static void testListsGetLastElement() {
+        // iterations - 2_000_000
+        // linked : 8   8   8
+        //  array : 5   6   6
+
+        Consumer<List<String>> lastElementGetter = (list) -> {
+            for (int i = 0; i < iterations; i++) {
+                list.get(list.size() - 1);
+            }
+        };
+        testLists(new LinkedList<>(), new ArrayList<>(), listFiller, lastElementGetter);
     }
 
     private static void testLists(List<String> linkedList, List<String> arrayList,
