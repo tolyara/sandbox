@@ -9,8 +9,8 @@ import java.util.function.UnaryOperator;
 public class CollectionsPerformance {
 
 //    private static final int iterations = 2_000_000;
-//    private static final int iterations = 200_000;
-    private static final int iterations = 20_000;
+    private static final int iterations = 200_000;
+//    private static final int iterations = 20_000;
 
     private static final String str = "Hello";
 
@@ -23,10 +23,11 @@ public class CollectionsPerformance {
 
     public static void main(String[] args) {
 //        testListsInsertToBegin();
-        testListsInsertToMiddle();
+//        testListsInsertToMiddle();
 //        testListsInsertToEnd();
 
 //        testListsRemoveFromBegin();
+        testListsRemoveFromMiddle();
 //        testListsRemoveFromEnd();
     }
 
@@ -41,6 +42,25 @@ public class CollectionsPerformance {
         Consumer<List<String>> removerFromBegin = (list) -> {
             while (!list.isEmpty()) {
                 list.remove(0);
+            }
+        };
+        testLists(new LinkedList<>(), new ArrayList<>(), listFiller, removerFromBegin);
+    }
+
+    /*
+        ArrayList wins
+    */
+    private static void testListsRemoveFromMiddle() {
+        // iterations - 20_000
+        // linked : 363 334 349
+        // array  : 26  25  27
+
+        // iterations - 20_000
+        // linked : 105788
+        // array  : 2512
+        Consumer<List<String>> removerFromBegin = (list) -> {
+            while (!list.isEmpty()) {
+                list.remove((list.size() - 1)/2);
             }
         };
         testLists(new LinkedList<>(), new ArrayList<>(), listFiller, removerFromBegin);
@@ -125,8 +145,10 @@ public class CollectionsPerformance {
 
     private static void testLists(List<String> linkedList, List<String> arrayList,
                                   UnaryOperator<List<String>> listFiller, Consumer<List<String>> targetOperation) {
+        System.out.println("Preparations are being made ... ");
         linkedList = listFiller.apply(linkedList);
         arrayList = listFiller.apply(arrayList);
+        System.out.println("Performance benchmarking starts ... ");
         process(linkedList, "linked", targetOperation);
         process(arrayList, "array", targetOperation);
     }
