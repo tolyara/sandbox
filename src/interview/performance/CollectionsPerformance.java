@@ -22,7 +22,8 @@ public class CollectionsPerformance {
     };
 
     public static void main(String[] args) {
-        testListsInsertToBegin();
+//        testListsInsertToBegin();
+        testListsInsertToMiddle();
 //        testListsInsertToEnd();
 
 //        testListsRemoveFromBegin();
@@ -83,6 +84,27 @@ public class CollectionsPerformance {
             }
         };
         testLists(new LinkedList<>(), new ArrayList<>(), list -> list, inserterToBegin);
+    }
+
+    /*
+        ArrayList wins
+    */
+    private static void testListsInsertToMiddle() {
+        // iterations - 20_000
+        // linked : 203 200 196
+        // array  : 26  25  26
+
+        // iterations - 200_000
+        // linked : 19713   19940
+        // array  : 2426    2407
+
+        Consumer<List<String>> inserterToMiddle = (list) -> {
+            for (int i = 0; i < iterations; i++) {
+                list.add((list.size() - 1)/2, str);
+//                list.add((list.size() - 1)/2, str + i);
+            }
+        };
+        testLists(new LinkedList<>(), new ArrayList<>(), list -> list, inserterToMiddle);
     }
 
     /*
