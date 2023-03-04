@@ -5,10 +5,9 @@ import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 /**
- *      Summary results:                           HashSet   |   TreeSet
- *      removing  (begin, middle, end)
- *      insertion
- *      getting   (begin, middle, end)
+ *      Summary results:              HashSet   |   TreeSet
+ *      removing                          +            -
+ *      insertion                         +=           -=
  */
 public class SetPerformance {
 
@@ -27,7 +26,6 @@ public class SetPerformance {
 
     public static void main(String[] args) {
 //        testInsert();
-
         testRemove();
     }
 
@@ -47,6 +45,9 @@ public class SetPerformance {
         new PerformanceMeasurer<Set<String>>(iterations).process(Arrays.asList(new HashSet<>(), new TreeSet<>()), set -> set, inserter);
     }
 
+    /*
+        Hash Set wins
+     */
     private static void testRemove() {
         // iterations - 2_000_000
         // hash set :   263     238     232
