@@ -26,7 +26,9 @@ public class SetPerformance {
     };
 
     public static void main(String[] args) {
-        testInsert();
+//        testInsert();
+
+        testRemove();
     }
 
     /*
@@ -43,6 +45,19 @@ public class SetPerformance {
             }
         };
         new PerformanceMeasurer<Set<String>>(iterations).process(Arrays.asList(new HashSet<>(), new TreeSet<>()), set -> set, inserter);
+    }
+
+    private static void testRemove() {
+        // iterations - 2_000_000
+        // hash set :   263     238     232
+        // tree set :   465     466     450
+
+        Consumer<Set<String>> remover = (set) -> {
+            for (int i = 0; i < iterations; i++) {
+                set.remove(String.valueOf(i));
+            }
+        };
+        new PerformanceMeasurer<Set<String>>(iterations).process(Arrays.asList(new HashSet<>(), new TreeSet<>()), setFiller, remover);
     }
 
 }

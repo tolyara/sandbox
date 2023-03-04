@@ -16,7 +16,9 @@ public class PerformanceMeasurer<O> {
         System.out.println("Preparations are being made ... ");
         for (O object : objects) {
             object = preparer.apply(object);
-            System.out.println("Prepared " + object.getClass().getSimpleName() + " : " + object);
+            if (object instanceof Collection) {
+                System.out.println("Prepared " + object.getClass().getSimpleName() + " size : " + ((Collection) object).size());
+            }
         }
         System.out.println("Performance benchmarking starts ... ");
         for (O object : objects) {
