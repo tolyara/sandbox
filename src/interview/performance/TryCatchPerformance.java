@@ -27,9 +27,7 @@ public class TryCatchPerformance {
         List<String> list2 = new ArrayList<>();
         Consumer<List<String>> tryCatch = (list) -> {
             try {
-                for (int i = 0; i < iterations; i++) {
-                    list.add(String.valueOf(i));
-                }
+                simple.accept(list);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
