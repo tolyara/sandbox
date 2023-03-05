@@ -15,7 +15,8 @@ public class Java8StreamApi {
 //        Integer result = methodChaining(list);
 //        concat();
 //        List<Integer> result = distinct(list);
-        long result = count(list);
+//        long result = count(list);
+        long result = peek(list);
 
         System.out.println(result);
     }
@@ -54,6 +55,10 @@ public class Java8StreamApi {
 //        return stream.distinct().count();
 
         return collection.stream().distinct().count();
+    }
+
+    private static long peek(Collection<Integer> collection) {
+        return collection.stream().distinct().peek(System.out::println).reduce((a, c) -> a + c).get();
     }
 
 }
