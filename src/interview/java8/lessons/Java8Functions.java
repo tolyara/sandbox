@@ -12,7 +12,8 @@ public class Java8Functions {
 //        booleanSupplier();
 //        consumer();
 //        function();
-        biFunction();
+//        biFunction();
+        binaryOperator();
     }
 
     // Represents a predicate (boolean-valued function) of one argument.
@@ -63,6 +64,15 @@ public class Java8Functions {
             return "square value = " + (Math.pow(base, degree));
         };
         System.out.println(biFunction.apply(1.5, 3));
+    }
+
+    // Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
+    private static void binaryOperator() {
+        BinaryOperator<Integer> binaryOperator = Math::multiplyExact;
+//        BinaryOperator<Integer> binaryOperator = (x, y) -> {
+//            return Math.multiplyExact(x, y);
+//        };
+        System.out.println(binaryOperator.apply(9, 8));
     }
 
 }
