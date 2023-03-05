@@ -9,7 +9,8 @@ public class Java8StreamApi {
         final Collection<Integer> list = Arrays.asList(3, 8, 1, 5, 9, 12, 81);
 
 //        Collection<Integer> result = sorted(list);
-        Integer result = reduce(list);
+//        Integer result = reduce(list);
+        Integer result = methodChaining(list);
 
         System.out.println(result);
     }
@@ -22,6 +23,10 @@ public class Java8StreamApi {
 
     private static Integer reduce(Collection<Integer> collection) {
         return collection.stream().reduce((accumulator, element) -> accumulator * element).get(); // 1049760
+    }
+
+    private static Integer methodChaining(Collection<Integer> collection) {
+        return collection.stream().filter(e -> (e % 2) == 1).reduce((a, e) -> a + e).get();
     }
 
 }

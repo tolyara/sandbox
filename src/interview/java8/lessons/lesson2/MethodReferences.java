@@ -49,7 +49,7 @@ class Student {
 
 class Utils {
 
-	public static <E> void print(String str) {
+	public static void print(String str) {
 		System.out.println(new Student(str).getName());
 	}
 
