@@ -1,9 +1,6 @@
 package interview.java8.lessons;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class Java8Functions {
 
@@ -12,8 +9,10 @@ public class Java8Functions {
     public static void main(String[] args) {
 //        predicate("Hello");
 //        supplier();
-        consumer();
+//        booleanSupplier();
+//        consumer();
 //        function();
+        biFunction();
     }
 
     // Represents a predicate (boolean-valued function) of one argument.
@@ -32,6 +31,15 @@ public class Java8Functions {
         System.out.println(supplier.get());
     }
 
+    // Represents a supplier of boolean-valued results.
+    private static void booleanSupplier() {
+        BooleanSupplier booleanSupplier = () -> Integer.valueOf(str.indexOf("lo")).equals(3);
+//        BooleanSupplier booleanSupplier = () -> {
+//            return Integer.valueOf(str.indexOf("lo")).equals(3);
+//        };
+        System.out.println(booleanSupplier.getAsBoolean());
+    }
+
     // Represents an operation that accepts a single input argument and returns no result.
     private static void consumer() {
 //        Consumer<String> consumer = System.out::println;
@@ -47,6 +55,14 @@ public class Java8Functions {
             return "intValue = " + (intValue);
         };
         System.out.println(function.apply(3));
+    }
+
+    // Represents a function that accepts two arguments and produces a result.
+    private static void biFunction() {
+        BiFunction<Double, Integer, String> biFunction = (base, degree) -> {
+            return "square value = " + (Math.pow(base, degree));
+        };
+        System.out.println(biFunction.apply(1.5, 3));
     }
 
 }
