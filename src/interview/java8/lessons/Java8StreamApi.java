@@ -16,7 +16,8 @@ public class Java8StreamApi {
 //        concat();
 //        List<Integer> result = distinct(list);
 //        long result = count(list);
-        long result = peek(list);
+//        long result = peek(list);
+        Collection result = flatMap();
 
         System.out.println(result);
     }
@@ -59,6 +60,56 @@ public class Java8StreamApi {
 
     private static long peek(Collection<Integer> collection) {
         return collection.stream().distinct().peek(System.out::println).reduce((a, c) -> a + c).get();
+    }
+
+    private static List<Object> flatMap() {
+        class Student {
+            String name;
+
+            Student(String name) {
+                this.name = name;
+            }
+
+            @Override
+            public String toString() {
+                return "Student{" +
+                        "name='" + name + '\'' +
+                        '}';
+            }
+        }
+
+        class Faculty {
+            String name;
+            List<Student> students = new ArrayList<>();
+
+            Faculty(String name) {
+                this.name = name;
+            }
+
+            public List<Student> getStudents() {
+                return students;
+            }
+
+            public void addStudent(Student student) {
+                this.students.add(student);
+            }
+        }
+
+        Student student1 = new Student("Student1");
+        Student student2 = new Student("Student2");
+        Student student3 = new Student("Student3");
+        Student student4 = new Student("Student4");
+
+        Faculty faculty1 = new Faculty("Economics");
+        Faculty faculty2 = new Faculty("Mathematics");
+
+        faculty1.addStudent(student1);
+        faculty1.addStudent(student2);
+        faculty2.addStudent(student3);
+
+        List<Faculty> faculties = Arrays.asList(faculty1, faculty2);
+
+        return faculties.stream().flatMap(f -> f.getStudents().stream()).collect(Collectors.toList());
     }
 
 }
