@@ -15,7 +15,9 @@ public class MethodReferences {
 //		Stream.of(new Student("Anatolii"), new Student("Elena")).map(x -> x.getName().toUpperCase())
 //		.forEach(System.out::println);
 
-		Stream.of("John", "Bill").map(Student::new).forEach(x -> System.out.println(x.getName()));
+//		Stream.of("John", "Bill").map(Student::new).forEach(x -> System.out.println(x.getName()));
+		Stream.of("John", "Bill").forEach(Utils::print);
+
 //		old();
 	}
 
@@ -41,6 +43,14 @@ class Student {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+}
+
+class Utils {
+
+	public static <E> void print(String str) {
+		System.out.println(new Student(str).getName());
 	}
 
 }
