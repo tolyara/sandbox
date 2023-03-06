@@ -32,7 +32,9 @@ public class Java8StreamApi {
 //        limit(students);
 //        List<Student> result = skip(students);
 //        List<Integer> result = mapToInt(students);
-        Object result = avg(students);
+//        Object result = avg(students);
+//        Object result = allMatch(students);
+        Object result = anyMatch(students);
 
         System.out.println(result);
     }
@@ -145,6 +147,30 @@ public class Java8StreamApi {
         return students.stream().mapToInt(Student::getAge).max().getAsInt();
 
 //        return students.stream().mapToInt(Student::getAge).average().getAsDouble();
+    }
+
+    /*
+        Returns whether all elements of this stream match the provided predicate.
+     */
+    // input ages - 21 22 23 24
+    private static boolean allMatch(Collection<Student> students) {
+//        return students.stream().allMatch(s -> s.getAge() > 20);  // true
+        return students.stream().allMatch(s -> s.getAge() > 21);    // false
+
+        // Result of 'new ArrayList<Student>().stream().allMatch(s -> s.getAge() > 21)' is always 'true'
+//        return new ArrayList<Student>().stream().allMatch(s -> s.getAge() > 21);
+    }
+
+    /*
+        Returns whether any elements of this stream match the provided predicate.
+    */
+    // input ages - 21 22 23 24
+    private static boolean anyMatch(Collection<Student> students) {
+//        return students.stream().anyMatch(s -> s.getAge() > 23);    // true
+        return students.stream().anyMatch(s -> s.getAge() > 24);    // false
+
+//        Result of 'new ArrayList<Student>().stream().anyMatch(s -> s.getAge() > 21)' is always 'false'
+//        return new ArrayList<Student>().stream().anyMatch(s -> s.getAge() > 21);
     }
 
     static class Student {
