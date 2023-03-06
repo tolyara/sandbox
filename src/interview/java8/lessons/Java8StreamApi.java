@@ -28,7 +28,10 @@ public class Java8StreamApi {
 
 //        Object result = groupingBy();
 //        Object result = partitioningBy(students);
-        Student result = findFirst(students);
+//        Student result = minMax(students);
+//        limit(students);
+//        List<Student> result = skip(students);
+        List<Integer> result = mapToInt(students);
 
         System.out.println(result);
     }
@@ -112,6 +115,27 @@ public class Java8StreamApi {
 
     private static Student findFirst(Collection<Student> students) {
         return students.stream().findFirst().get();
+    }
+
+    private static Student minMax(Collection<Student> students) {
+//        return students.stream().min(((o1, o2) -> o1.getAge() - o2.getAge())).get();
+//        return students.stream().min((Comparator.comparingInt(Student::getAge))).get();
+
+        return students.stream().max((Comparator.comparingInt(Student::getAge))).get();
+    }
+
+    private static List<Student> limit(Collection<Student> students) {
+        return students.stream().limit(2).collect(Collectors.toList());
+    }
+
+    private static List<Student> skip(Collection<Student> students) {
+        return students.stream().skip(2).collect(Collectors.toList());
+    }
+
+    private static List<Integer> mapToInt(Collection<Student> students) {
+        return students.stream().mapToInt(s -> s.getAge())
+                .boxed()    // int -> Integer
+                .collect(Collectors.toList());
     }
 
     static class Student {

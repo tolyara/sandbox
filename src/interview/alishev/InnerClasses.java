@@ -8,7 +8,7 @@ public class InnerClasses {
 		electrocar.start();
 		
 		Electrocar.Battery battery = new Electrocar.Battery();
-		
+		battery.charge();
 	}
 
 }
