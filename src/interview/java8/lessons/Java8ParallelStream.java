@@ -16,7 +16,7 @@ public class Java8ParallelStream {
 //        double result = list.parallelStream().reduce((a, c) -> a + c).get(); // 16.25
 
         // incorrect work, the quotient depends on the order of the dividends/divider
-//        double result = list.parallelStream().reduce((a, c) -> a / c).get(); // 0.5
+//        double result = list.parallelStream().reduce((a, c) -> a / c).get(); // 0.5 (10/5 = 2, 1/0.25 = 4, 2/4 = 0.5)
         double result = list.stream().reduce((a, c) -> a / c).get(); // 8.0
 
         System.out.println(result);
