@@ -18,9 +18,11 @@ public class Java8StreamApi {
 //        long result = count(list);
 //        long result = peek(list);
 //        Collection result = flatMap();
-        mapVsPeek();
+//        mapVsPeek();
+//        Object result = groupingBy();
+        Object result = partitioningBy();
 
-//        System.out.println(result);
+        System.out.println(result);
     }
 
     /* list = Arrays.asList(3, 8, 1, 5, 9, 12, 81); */
@@ -90,15 +92,58 @@ public class Java8StreamApi {
         System.out.println(map.get(0) == peek.get(0));
     }
 
+    private static Object groupingBy() {
+        Student student1 = new Student("Student1", 21, 1);
+        Student student2 = new Student("Student2", 22, 1);
+        Student student3 = new Student("Student3", 23, 2);
+        Student student4 = new Student("Student4", 24, 3);
+        List<Student> students = Arrays.asList(student1, student2, student3, student4);
+
+        Map<Integer, List<Student>> studentsMap = students.stream().collect(Collectors.groupingBy(s -> s.getCourse()));
+        return studentsMap;
+    }
+
+    private static Object partitioningBy() {
+        Student student1 = new Student("Student1", 21, 1);
+        Student student2 = new Student("Student2", 22, 1);
+        Student student3 = new Student("Student3", 23, 2);
+        Student student4 = new Student("Student4", 24, 3);
+        List<Student> students = Arrays.asList(student1, student2, student3, student4);
+
+        Map<Boolean, List<Student>> studentsMap = students.stream().collect(Collectors.partitioningBy(s -> s.getAge() > 22));
+        return studentsMap;
+    }
+
     static class Student {
         String name;
+        int age;
+        int course;
 
         Student(String name) {
             this.name = name;
         }
 
+        public Student(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public Student(String name, int age, int course) {
+            this.name = name;
+            this.age = age;
+            this.course = course;
+        }
+
         public String getName() {
             return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public int getCourse() {
+            return course;
         }
 
         @Override
