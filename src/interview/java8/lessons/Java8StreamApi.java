@@ -17,9 +17,10 @@ public class Java8StreamApi {
 //        List<Integer> result = distinct(list);
 //        long result = count(list);
 //        long result = peek(list);
-        Collection result = flatMap();
+//        Collection result = flatMap();
+        mapVsPeek();
 
-        System.out.println(result);
+//        System.out.println(result);
     }
 
     /* list = Arrays.asList(3, 8, 1, 5, 9, 12, 81); */
@@ -63,38 +64,6 @@ public class Java8StreamApi {
     }
 
     private static List<Object> flatMap() {
-        class Student {
-            String name;
-
-            Student(String name) {
-                this.name = name;
-            }
-
-            @Override
-            public String toString() {
-                return "Student{" +
-                        "name='" + name + '\'' +
-                        '}';
-            }
-        }
-
-        class Faculty {
-            String name;
-            List<Student> students = new ArrayList<>();
-
-            Faculty(String name) {
-                this.name = name;
-            }
-
-            public List<Student> getStudents() {
-                return students;
-            }
-
-            public void addStudent(Student student) {
-                this.students.add(student);
-            }
-        }
-
         Student student1 = new Student("Student1");
         Student student2 = new Student("Student2");
         Student student3 = new Student("Student3");
@@ -110,6 +79,51 @@ public class Java8StreamApi {
         List<Faculty> faculties = Arrays.asList(faculty1, faculty2);
 
         return faculties.stream().flatMap(f -> f.getStudents().stream()).collect(Collectors.toList());
+    }
+
+    private static void mapVsPeek() {
+        Student student1 = new Student("Student1");
+        List<Student> target = Collections.singletonList(student1);
+//        List<Student> map = target.stream().map(s -> s).collect(Collectors.toList());
+        List<Student> map = target.stream().map(s -> new Student(s.getName())).collect(Collectors.toList()); // new student
+        List<Student> peek = target.stream().peek(s -> {}).collect(Collectors.toList()); // same student
+        System.out.println(map.get(0) == peek.get(0));
+    }
+
+    static class Student {
+        String name;
+
+        Student(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+    }
+
+    static class Faculty {
+        String name;
+        List<Student> students = new ArrayList<>();
+
+        Faculty(String name) {
+            this.name = name;
+        }
+
+        public List<Student> getStudents() {
+            return students;
+        }
+
+        public void addStudent(Student student) {
+            this.students.add(student);
+        }
     }
 
 }
