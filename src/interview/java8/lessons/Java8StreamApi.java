@@ -8,7 +8,13 @@ public class Java8StreamApi {
 
     public static void main(String[] args) {
 //        final Collection<Integer> list = Arrays.asList(3, 8, 1, 5, 9, 12, 81);
-        final Collection<Integer> list = Arrays.asList(1, 2, 3, 4, 1, 2, 3);
+//        final Collection<Integer> list = Arrays.asList(1, 2, 3, 4, 1, 2, 3);
+
+        Student student1 = new Student("Student1", 21, 1);
+        Student student2 = new Student("Student2", 22, 1);
+        Student student3 = new Student("Student3", 23, 2);
+        Student student4 = new Student("Student4", 24, 3);
+        List<Student> students = Arrays.asList(student1, student2, student3, student4);
 
 //        Collection<Integer> result = sorted(list);
 //        Integer result = reduce(list);
@@ -19,8 +25,10 @@ public class Java8StreamApi {
 //        long result = peek(list);
 //        Collection result = flatMap();
 //        mapVsPeek();
+
 //        Object result = groupingBy();
-        Object result = partitioningBy();
+//        Object result = partitioningBy(students);
+        Student result = findFirst(students);
 
         System.out.println(result);
     }
@@ -92,26 +100,18 @@ public class Java8StreamApi {
         System.out.println(map.get(0) == peek.get(0));
     }
 
-    private static Object groupingBy() {
-        Student student1 = new Student("Student1", 21, 1);
-        Student student2 = new Student("Student2", 22, 1);
-        Student student3 = new Student("Student3", 23, 2);
-        Student student4 = new Student("Student4", 24, 3);
-        List<Student> students = Arrays.asList(student1, student2, student3, student4);
-
+    private static Object groupingBy(Collection<Student> students) {
         Map<Integer, List<Student>> studentsMap = students.stream().collect(Collectors.groupingBy(s -> s.getCourse()));
         return studentsMap;
     }
 
-    private static Object partitioningBy() {
-        Student student1 = new Student("Student1", 21, 1);
-        Student student2 = new Student("Student2", 22, 1);
-        Student student3 = new Student("Student3", 23, 2);
-        Student student4 = new Student("Student4", 24, 3);
-        List<Student> students = Arrays.asList(student1, student2, student3, student4);
-
+    private static Object partitioningBy(Collection<Student> students) {
         Map<Boolean, List<Student>> studentsMap = students.stream().collect(Collectors.partitioningBy(s -> s.getAge() > 22));
         return studentsMap;
+    }
+
+    private static Student findFirst(Collection<Student> students) {
+        return students.stream().findFirst().get();
     }
 
     static class Student {
