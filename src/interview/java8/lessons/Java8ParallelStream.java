@@ -3,6 +3,9 @@ package interview.java8.lessons;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  It is reasonable to use parallel streams when we have a huge amount of elements, otherwise it could even reduce the performance
+ */
 public class Java8ParallelStream {
 
     public static void main(String[] args) {
