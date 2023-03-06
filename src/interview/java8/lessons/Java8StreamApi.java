@@ -31,7 +31,8 @@ public class Java8StreamApi {
 //        Student result = minMax(students);
 //        limit(students);
 //        List<Student> result = skip(students);
-        List<Integer> result = mapToInt(students);
+//        List<Integer> result = mapToInt(students);
+        Object result = avg(students);
 
         System.out.println(result);
     }
@@ -136,6 +137,14 @@ public class Java8StreamApi {
         return students.stream().mapToInt(s -> s.getAge())
                 .boxed()    // int -> Integer
                 .collect(Collectors.toList());
+    }
+
+    private static Object avg(Collection<Student> students) {
+//        return students.stream().mapToInt(Student::getAge).sum();
+//        return students.stream().mapToInt(Student::getAge).min().getAsInt();
+        return students.stream().mapToInt(Student::getAge).max().getAsInt();
+
+//        return students.stream().mapToInt(Student::getAge).average().getAsDouble();
     }
 
     static class Student {
