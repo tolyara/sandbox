@@ -7,6 +7,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Queues {
 
@@ -16,7 +18,9 @@ public class Queues {
 	}
 
 	private static void offerVsAdd() {
-		Queue<Car> cars = new ArrayBlockingQueue<>(3);
+//		Queue<Car> cars = new ArrayBlockingQueue<>(3);
+//		Queue<Car> cars = new LinkedBlockingQueue<>(3);
+		Queue<Car> cars = new LinkedBlockingDeque<>(3);
 
 		Car car1 = new Car("Nissan");
 		Car car2 = new Car("BMW");
