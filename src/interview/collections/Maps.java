@@ -22,16 +22,22 @@ public class Maps {
 		Dummy dummy2 = new Dummy(222);
 		Dummy dummy3 = new Dummy(333);
 		map.put(dummy1, "one");
+		System.out.println();
 		map.put(dummy2, "two");
+		System.out.println();
 		map.put(dummy3, "three");
+		System.out.println();
 
 		Field field = map.getClass().getDeclaredField("table");
 		field.setAccessible(true);
 		Object[] table = (Object[]) field.get(map);
+
+		// print bucket content and bucket amount
 		for (Object object : table) {
 			System.out.println(object);
 		}
 		System.out.println(table.length);
+
 	}
 
 	private static void concurrentHashMap() {
@@ -122,16 +128,19 @@ class Dummy {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + var;
-		return result;
+		System.out.println(this + " hashCode() call ...");
 
-//		return 33;
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + var;
+//		return result;
+
+		return 1;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		System.out.println(this + " equals() call ...");
 		if (this == obj)
 			return true;
 		if (obj == null)
