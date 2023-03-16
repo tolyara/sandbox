@@ -21,22 +21,26 @@ public class Maps {
 		Dummy dummy1 = new Dummy(111);
 		Dummy dummy2 = new Dummy(222);
 		Dummy dummy3 = new Dummy(333);
+		Dummy dummy4 = new Dummy(444);
 		map.put(dummy1, "one");
 		System.out.println();
 		map.put(dummy2, "two");
 		System.out.println();
 		map.put(dummy3, "three");
 		System.out.println();
+		map.put(dummy4, "four");
 
 		Field field = map.getClass().getDeclaredField("table");
 		field.setAccessible(true);
 		Object[] table = (Object[]) field.get(map);
 
 		// print bucket content and bucket amount
-		for (Object object : table) {
-			System.out.println(object);
-		}
-		System.out.println(table.length);
+//		for (Object object : table) {
+//			System.out.println(object
+////					+ " - " + (object != null ? object.getClass() : "")
+//			);
+//		}
+//		System.out.println(table.length);
 
 	}
 
