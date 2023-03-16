@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
  *      insertion (begin, middle, end)           +  -  -=        -  +  +=
  *      getting   (begin, middle, end)           =  -   =        =  +   =
  */
-public class CollectionsPerformance {
+public class ListPerformance {
 
 //    private static final int iterations = 2_000_000;
 //    private static final int iterations = 200_000;
