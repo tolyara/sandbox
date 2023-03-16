@@ -13,7 +13,31 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Maps {
 
 	public static void main(String[] args) throws Exception {
-		mapInside();
+//		mapInside();
+		mapTreeify();
+	}
+
+	private static void mapTreeify() throws Exception {
+		Map<Dummy, String> map = new HashMap<>();
+		final int TREEIFY_THRESHOLD = 8; // default HashMap TREEIFY_THRESHOLD
+
+//		for (int i = 0; i < TREEIFY_THRESHOLD; i++) { 	  // class java.util.HashMap$Node
+//		for (int i = 0; i < TREEIFY_THRESHOLD + 2; i++) { // class java.util.HashMap$Node
+		for (int i = 0; i < TREEIFY_THRESHOLD + 3; i++) { // class java.util.HashMap$TreeNode
+			Dummy dummy = new Dummy(i);
+			map.put(dummy, String.valueOf(dummy.var));
+			System.out.println();
+		}
+
+		Field field = map.getClass().getDeclaredField("table");
+		field.setAccessible(true);
+		Object[] table = (Object[]) field.get(map);
+
+		for (Object object : table) {
+			System.out.println(object + " - " + (object != null ? object.getClass().getName() : ""));
+		}
+		System.out.println(table.length);
+
 	}
 
 	private static void mapInside() throws Exception {
@@ -28,7 +52,8 @@ public class Maps {
 		System.out.println();
 		map.put(dummy3, "three");
 		System.out.println();
-		map.put(dummy4, "four");
+//		map.put(dummy4, "four");
+		map.put(dummy3, "three-1");
 
 		Field field = map.getClass().getDeclaredField("table");
 		field.setAccessible(true);
@@ -132,7 +157,7 @@ class Dummy {
 
 	@Override
 	public int hashCode() {
-		System.out.println(this + " hashCode() call ...");
+//		System.out.println(this + " hashCode() call ...");
 
 //		final int prime = 31;
 //		int result = 1;
@@ -144,7 +169,8 @@ class Dummy {
 
 	@Override
 	public boolean equals(Object obj) {
-		System.out.println(this + " equals() call ...");
+//		System.out.println(this + " equals() call ...");
+
 		if (this == obj)
 			return true;
 		if (obj == null)
