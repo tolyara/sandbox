@@ -6,11 +6,35 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class Queues {
 
 	public static void main(String[] args) {
-		test1();
+//		test1();
+		offerVsAdd();
+	}
+
+	private static void offerVsAdd() {
+		Queue<Car> cars = new ArrayBlockingQueue<>(3);
+
+		Car car1 = new Car("Nissan");
+		Car car2 = new Car("BMW");
+		Car car3 = new Car("Toyota");
+		Car car4 = new Car("Kia");
+
+		cars.offer(car1);
+		cars.offer(car2);
+		cars.offer(car3);
+		cars.offer(car4); // no exception, element just not added to queue
+		System.out.println(cars);
+
+		cars.clear();
+		cars.add(car1);
+		cars.add(car2);
+		cars.add(car3);
+		cars.add(car4); // java.lang.IllegalStateException: Queue full
+		System.out.println(cars);
 	}
 
 	public static void test1() {
