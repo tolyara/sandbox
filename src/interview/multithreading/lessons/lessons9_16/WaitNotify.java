@@ -8,9 +8,12 @@ public class WaitNotify {
 		MyThread myThread = new MyThread();
 		myThread.start();
 		synchronized (lock) {
+			// increment one time and give control to myThread
 			myThread.total++;
 			System.out.println(myThread.total + " - " + Thread.currentThread().getName());
-			lock.wait();
+
+//			lock.wait();
+			lock.wait(20); // main thread will still wait after timeout time elapsed so it will work exactly as lock.wait();
 		}
 		System.out.println(myThread.total + " - " + Thread.currentThread().getName());
 	}
