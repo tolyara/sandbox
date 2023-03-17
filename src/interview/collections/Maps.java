@@ -13,8 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Maps {
 
 	public static void main(String[] args) throws Exception {
-//		mapInside();
-		mapTreeify();
+		mapInside();
+//		mapTreeify();
 	}
 
 	private static void mapTreeify() throws Exception {
@@ -53,7 +53,14 @@ public class Maps {
 		map.put(dummy3, "three");
 		System.out.println();
 //		map.put(dummy4, "four");
-		map.put(dummy3, "three-1");
+//		map.put(dummy3, "three-1");
+
+		map.get(dummy1);
+		System.out.println();
+		map.get(dummy2);
+		System.out.println();
+		map.get(dummy3);
+		System.out.println();
 
 		Field field = map.getClass().getDeclaredField("table");
 		field.setAccessible(true);
@@ -157,7 +164,7 @@ class Dummy {
 
 	@Override
 	public int hashCode() {
-//		System.out.println(this + " hashCode() call ...");
+		System.out.println(this + " hashCode() call ...");
 
 //		final int prime = 31;
 //		int result = 1;
@@ -169,7 +176,7 @@ class Dummy {
 
 	@Override
 	public boolean equals(Object obj) {
-//		System.out.println(this + " equals() call ...");
+		System.out.println(this + " equals() call ...");
 
 		if (this == obj)
 			return true;
