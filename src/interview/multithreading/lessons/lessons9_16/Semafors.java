@@ -5,8 +5,9 @@ import java.util.concurrent.Semaphore;
 public class Semafors {
 	
 	public static void main(String[] args) {
-		Semaphore table = new Semaphore(3);
-		
+//		Semaphore table = new Semaphore(3);
+		Semaphore table = new Semaphore(1);
+
 		for (int i = 0; i < 7; i++) {
 			Person person = new Person();
 			person.table = table;

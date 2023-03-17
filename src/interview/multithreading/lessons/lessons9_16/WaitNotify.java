@@ -8,6 +8,8 @@ public class WaitNotify {
 		MyThread myThread = new MyThread();
 		myThread.start();
 		synchronized (lock) {
+			myThread.total++;
+			System.out.println(myThread.total + " - " + Thread.currentThread().getName());
 			lock.wait();
 		}
 		System.out.println(myThread.total + " - " + Thread.currentThread().getName());
@@ -20,7 +22,7 @@ public class WaitNotify {
 		@Override
 		public void run() {
 			synchronized (lock) {
-				for (int i = 0; i < 5; i++) {
+				for (int i = 1; i < 5; i++) {
 					total++;
 					System.out.println(total + " - " + Thread.currentThread().getName());
 					try {
