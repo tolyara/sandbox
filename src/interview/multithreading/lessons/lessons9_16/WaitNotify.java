@@ -2,7 +2,7 @@ package interview.multithreading.lessons.lessons9_16;
 
 public class WaitNotify {
 	
-	static Object lock = new Object();
+	static final Object lock = new Object();
 	
 	public static void main(String[] args) throws InterruptedException {
 		MyThread myThread = new MyThread();
