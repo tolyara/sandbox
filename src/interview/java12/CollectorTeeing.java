@@ -39,18 +39,21 @@ public class CollectorTeeing {
     public static void test2() {
         EventParticipation result =
                 Stream.of(
+                                new Guest("Jack", true, 1),
                                 new Guest("Marco", false, 3),
                                 new Guest("David", false, 2),
                                 new Guest("Roger",true, 6))
                         .collect(Collectors.teeing(
-                                Collectors.filtering(guest -> !guest.isParticipating(),
-                                        Collectors.mapping(guest -> guest.getName().toUpperCase(), Collectors.toList())),
+                                Collectors.filtering(guest -> guest.isParticipating(),
+//                                        Collectors.mapping(guest -> guest.getName().toUpperCase(), Collectors.toList())),
+                                        Collectors.mapping(guest -> guest.getName(),
+                                                Collectors.mapping(name -> name.toUpperCase(), Collectors.toList()))),
 
 //                                Collectors.counting(),
                                 Collectors.summingInt(guest -> 1),
 //                                Collectors.summingInt(Guest::getParticipantsNumber),
 
-                                EventParticipation::new
+                                (guestList, totalParticipants) -> new EventParticipation(guestList, totalParticipants)
                         ));
         System.out.println(result);
     }
