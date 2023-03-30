@@ -15,7 +15,7 @@ public class Java17 {
 //    private static void JEP_406_PatternMatchingForSwitch(Object o) {
 //        switch (o) {
 //            case String s -> System.out.println("String : " + s);
-//            case Integer i -> System.out.println("String : " + i);
+//            case Integer i -> System.out.println("Integer : " + i);
 //            default -> System.out.println("Object : " + o);
 //        }
 //    }
