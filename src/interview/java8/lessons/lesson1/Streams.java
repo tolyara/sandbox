@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Streams {
@@ -13,7 +14,8 @@ public class Streams {
 	
 	public static void main(String[] args) {
 		
-		stream2();
+//		stream2();
+		flatMap();
 		
 	}
 	
@@ -116,6 +118,15 @@ public class Streams {
 			System.out.println(iterator.next());
 		}
 		
+	}
+
+	private static void flatMap() {
+		Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5);
+
+//		List<Integer> result = stream.map(i -> i + 1).collect(Collectors.toList());
+		List<Integer> result = stream.flatMap(i -> Stream.of(i + 1)).collect(Collectors.toList());
+
+		System.out.println(result);
 	}
 
 }
