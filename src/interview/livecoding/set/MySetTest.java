@@ -21,6 +21,19 @@ public class MySetTest {
 		Assert.assertFalse(set.isEmpty());
 	}
 
+	@Test
+	public void testRemove() throws Exception {
+		Assert.assertEquals(2, set.size());
+
+		System.out.println(set);
+		set.remove("1");
+		System.out.println(set);
+
+		Assert.assertEquals(1, set.size());
+		Assert.assertFalse(set.contains("1"));
+		Assert.assertTrue(set.contains("2"));
+	}
+
 	@After
 	public void after() {
 		set.clear();
