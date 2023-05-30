@@ -1,4 +1,4 @@
-package interview.livecoding;
+package interview.livecoding.javarush;
 
 public class ExecutableComment {
 
