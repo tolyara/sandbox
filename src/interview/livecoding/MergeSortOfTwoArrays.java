@@ -30,8 +30,11 @@ public class MergeSortOfTwoArrays {
     }
 
     private static void mergeSortOfTwoArrays() {
-        Integer[] arr1 = new Integer[] {1, 3, 5};
-        Integer[] arr2 = new Integer[] {2, 4, 5};
+//        Integer[] arr1 = new Integer[] {1, 3, 5};
+//        Integer[] arr2 = new Integer[] {2, 4, 5};
+
+        Integer[] arr1 = new Integer[] {6, 20, 31};
+        Integer[] arr2 = new Integer[] {4, 5, 17, 18};
 
         Integer[] result = mergeSortOfTwoSortedArrays(arr1, arr2);
         System.out.print("[ ");
@@ -42,20 +45,58 @@ public class MergeSortOfTwoArrays {
     }
 
     private static Integer[] mergeSortOfTwoSortedArrays(Integer[] arr1, Integer[] arr2) {
-        List<Integer> result = new ArrayList<>();
+        // 1 - easy solution using Collections.sort(...)
+//        List<Integer> result = new ArrayList<>();
+//        Collections.addAll(result, arr1);
+//        result.addAll(Arrays.asList(arr2));
+//        Collections.sort(result);
+//
+//        Integer[] resultArr = new Integer[result.size()];
+//        for (int i = 0; i < result.size(); i++) {
+//            resultArr[i] = result.get(i);
+//        }
+//        return resultArr;
 
-        // easy solution using Collections.sort(...)
-        Collections.addAll(result, arr1);
-        result.addAll(Arrays.asList(arr2));
-        Collections.sort(result);
+        // 2 - use direct merge function
+        Integer[] result = new Integer[arr1.length + arr2.length];
 
-        Integer[] resultArr = new Integer[result.size()];
-        for (int i = 0; i < result.size(); i++) {
-            resultArr[i] = result.get(i);
+        Integer[] longArr;
+        Integer[] shortArr;
+
+        if (arr1.length <= arr2.length) {
+            shortArr = arr1;
+            longArr = arr2;
+        } else {
+            shortArr = arr2;
+            longArr = arr1;
         }
-        return resultArr;
 
-        // TODO use direct merge function
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        for (; i < shortArr.length && j < longArr.length; k++) {
+//        for (int i = 0, j = 0, k = 0; i < shortArr.length && j < longArr.length; k++) {
+            if (shortArr[i] <= longArr[j]) {
+                result[k] = shortArr[i];
+                i++;
+            } else {
+                result[k] = longArr[j];
+                j++;
+            }
+        }
+        // Copy remaining elements of shortArr[] if any
+        while (i < shortArr.length) {
+            result[k] = shortArr[i];
+            i++;
+            k++;
+        }
+        // Copy remaining elements of longArr[] if any
+        while (j < longArr.length) {
+            result[k] = longArr[j];
+            j++;
+            k++;
+        }
+        return result;
     }
 
 }
