@@ -33,8 +33,11 @@ public class MergeSortOfTwoArrays {
 //        Integer[] arr1 = new Integer[] {1, 3, 5};
 //        Integer[] arr2 = new Integer[] {2, 4, 5};
 
-        Integer[] arr1 = new Integer[] {6, 20, 31};
-        Integer[] arr2 = new Integer[] {4, 5, 17, 18};
+//        Integer[] arr1 = new Integer[] {6, 20, 31};
+//        Integer[] arr2 = new Integer[] {4, 5, 17, 18};
+
+        Integer[] arr1 = new Integer[] {7, 20, 31, 32};
+        Integer[] arr2 = new Integer[] {4, 5, 17, 22, 24};
 
         Integer[] result = mergeSortOfTwoSortedArrays(arr1, arr2);
         System.out.print("[ ");
@@ -79,22 +82,27 @@ public class MergeSortOfTwoArrays {
             if (shortArr[i] <= longArr[j]) {
                 result[k] = shortArr[i];
                 i++;
+                System.out.println("short, i = " + i + ", k = " + k);
             } else {
                 result[k] = longArr[j];
                 j++;
+                System.out.println("long, j = " + j + ", k = " + k);
             }
         }
+
         // Copy remaining elements of shortArr[] if any
         while (i < shortArr.length) {
             result[k] = shortArr[i];
             i++;
             k++;
+            System.out.println("short appendix, i = " + i + ", k = " + k);
         }
         // Copy remaining elements of longArr[] if any
         while (j < longArr.length) {
             result[k] = longArr[j];
             j++;
             k++;
+            System.out.println("long appendix, j = " + j + ", k = " + k);
         }
         return result;
     }
