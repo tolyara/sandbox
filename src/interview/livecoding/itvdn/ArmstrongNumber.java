@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 public class ArmstrongNumber {
 
     public static void main(String[] args) {
+        // false
         System.out.println(isArmstrongNumber(123));
 
+        // true
         System.out.println(isArmstrongNumber(371));
         System.out.println(isArmstrongNumber(8208));
     }
@@ -24,7 +26,8 @@ public class ArmstrongNumber {
         List<Integer> digits = charsList.stream().map(c -> Integer.parseInt(String.valueOf(c))).collect(Collectors.toList());
         int length = digits.size();
 
-        Integer sum = digits.stream().reduce((accumulator, digit) -> accumulator + (int) Math.pow(Double.valueOf(digit), length)).get();
+//        Integer sum = digits.stream().reduce((accumulator, digit) -> accumulator + (int) Math.pow(Double.valueOf(digit), length)).get();
+        Integer sum = digits.stream().mapToInt(digit -> (int) Math.pow(Double.valueOf(digit), length)).sum();
         return sum.equals(number);
     }
 
