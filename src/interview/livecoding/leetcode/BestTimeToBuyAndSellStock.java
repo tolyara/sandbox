@@ -32,7 +32,11 @@ package interview.livecoding.leetcode;
 public class BestTimeToBuyAndSellStock {
 
     public static void main(String[] args) {
-        int[] prices = {7, 1, 5, 3, 6, 4};
+//        int[] prices = {7, 1, 5, 3, 6, 4};
+//        int[] prices = {7, 6, 4, 3, 1};
+
+//        int[] prices = {3, 2, 4, 1};
+        int[] prices = {};
 
         System.out.println(getMaximumProfit(prices));
     }
