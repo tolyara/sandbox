@@ -69,12 +69,12 @@ public class BestTimeToBuyAndSellStock {
         int result = 0;
 
         for (int i = 0; i < prices.length; i++) {
-            System.out.println(prices[i] +  " - " + minPrice  + " - " + result);
+//            System.out.println(prices[i] +  " - " + minPrice  + " - " + result);
             result = Math.max(result, prices[i] - minPrice);
-            System.out.println(prices[i] +  " - " + minPrice  + " - " + result);
+//            System.out.println(prices[i] +  " - " + minPrice  + " - " + result);
             minPrice = Math.min(prices[i], minPrice);
-            System.out.println(prices[i] +  " - " + minPrice  + " - " + result);
-            System.out.println();
+//            System.out.println(prices[i] +  " - " + minPrice  + " - " + result);
+//            System.out.println();
         }
         return result;
     }
