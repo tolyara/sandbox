@@ -1,29 +1,29 @@
 package interview.livecoding.fortest;
 
-public class TestCase {
+public class TestCase<E, T> {
 
-    private Object expected;
+    private E expected;
 
-    private Object target;
+    private T target;
 
-    public TestCase(Object expected, Object target) {
+    public TestCase(E expected, T target) {
         this.expected = expected;
         this.target = target;
     }
 
-    public Object getExpected() {
+    public E getExpected() {
         return expected;
     }
 
-    public void setExpected(Object expected) {
+    public void setExpected(E expected) {
         this.expected = expected;
     }
 
-    public Object getTarget() {
+    public T getTarget() {
         return target;
     }
 
-    public void setTarget(Object target) {
+    public void setTarget(T target) {
         this.target = target;
     }
 

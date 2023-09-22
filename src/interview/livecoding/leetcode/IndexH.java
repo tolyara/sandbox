@@ -1,6 +1,7 @@
 package interview.livecoding.leetcode;
 
 import interview.livecoding.fortest.TestCase;
+import interview.livecoding.fortest.TestCaseArray;
 
 import java.util.List;
 
@@ -33,14 +34,14 @@ public class IndexH {
 
     public static void main(String[] args) {
 //        Map<Integer, int[]> testCases = Map.of(
-        List<TestCase> testCases = List.of(
-                new TestCase(3, new int[]{9, 7, 6, 2, 1}),
-                new TestCase(1, new int[]{1, 3, 1}),
-                new TestCase(3, new int[]{3, 0, 6, 1, 5})
+        List<TestCaseArray> testCases = List.of(
+                new TestCaseArray(3, new int[]{9, 7, 6, 2, 1}),
+                new TestCaseArray(1, new int[]{1, 3, 1}),
+                new TestCaseArray(3, new int[]{3, 0, 6, 1, 5})
         );
 
         testCases.forEach((t) -> {
-            int result = getHIndex((int[]) t.getTarget());
+            int result = getHIndex(t.getTarget());
             System.out.println("(" + (t.getExpected().equals(result) ? "+" : "-") + ") " + t.getExpected() + " -> " + result);
         });
     }
