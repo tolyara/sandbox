@@ -2,10 +2,11 @@ package interview.livecoding.leetcode;
 
 import interview.livecoding.fortest.TestCaseArray;
 import interview.livecoding.fortest.TestUtil;
+import interview.performance.PerformanceMeasurer;
 
 import java.security.SecureRandom;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  *
@@ -38,7 +39,8 @@ public class IndexH {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-        runTestCases();
+//        runTestCases();
+        checkPerformance();
     }
 
     private static void checkPerformance() {
@@ -49,7 +51,12 @@ public class IndexH {
         for (int i = 0; i < amount; i++) {
             target[i] = RANDOM.nextInt(bound) + 1;
         }
-        int result = getHIndex(target);
+
+        Consumer<int[]> remover = (set) -> {
+            getHIndex(target);
+        };
+        new PerformanceMeasurer<int[]>(amount).process(Arrays.asList(target), f -> f, remover);
+
     }
 
     private static void runTestCases() {
