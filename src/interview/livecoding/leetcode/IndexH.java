@@ -46,17 +46,22 @@ public class IndexH {
     }
 
     private static int getHIndex(int[] citations) {
-//    private static int hIndex(List<Integer> citations) {
+        int hIndex = 0;
+        if ( citations.length == 0) return hIndex;
 
-//        int hIndex = 0;
-        int hIndex = citations.length;
-
-        for (int i = 0; i < citations.length; i++) {
-            if (citations[i] < citations.length) {
-                hIndex--;
+        for (int possibleHIndex = 1; possibleHIndex < citations.length; possibleHIndex++) {
+            int articles = 0;
+            for (int i = 0; i < citations.length; i++) {
+                if (citations[i] >= possibleHIndex) {
+                    articles++;
+                }
+            }
+            if (articles >= possibleHIndex) {
+                hIndex = possibleHIndex;
+            } else {
+                break;
             }
         }
-
         return hIndex;
     }
 
