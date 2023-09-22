@@ -7,6 +7,7 @@ import interview.performance.PerformanceMeasurer;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 /**
  *
@@ -44,19 +45,23 @@ public class IndexH {
     }
 
     private static void checkPerformance() {
-        int amount = 5_000;
-        int bound = 1000;
-        int[] target = new int[amount];
+//        int arrayLength = 200_000;  // getHIndex : 607
+        int arrayLength = 200_000;  // getHIndex2 : ?
 
-        for (int i = 0; i < amount; i++) {
-            target[i] = RANDOM.nextInt(bound) + 1;
-        }
+        int bound = 1000;
+        int[] targetArray = new int[arrayLength];
+
+        UnaryOperator<int[]> arrayFiller = (array) -> {
+            for (int i = 0; i < arrayLength; i++) {
+                targetArray[i] = RANDOM.nextInt(bound) + 1;
+            }
+            return array;
+        };
 
         Consumer<int[]> remover = (set) -> {
-            getHIndex(target);
+            getHIndex2(targetArray);
         };
-        new PerformanceMeasurer<int[]>(amount).process(Arrays.asList(target), f -> f, remover);
-
+        new PerformanceMeasurer<int[]>(arrayLength).process(Arrays.asList(targetArray), arrayFiller, remover);
     }
 
     private static void runTestCases() {
@@ -76,7 +81,7 @@ public class IndexH {
 
     private static int getHIndex(int[] citations) {
         int hIndex = 0;
-        if ( citations.length == 0) return hIndex;
+        if (citations.length == 0) return hIndex;
 
         for (int possibleHIndex = 1; possibleHIndex < citations.length; possibleHIndex++) {
             int articles = 0;
