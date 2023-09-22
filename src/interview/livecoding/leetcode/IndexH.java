@@ -3,7 +3,9 @@ package interview.livecoding.leetcode;
 import interview.livecoding.fortest.TestCaseArray;
 import interview.livecoding.fortest.TestUtil;
 
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -32,7 +34,25 @@ import java.util.List;
  */
 public class IndexH {
 
+//    private static final SecureRandom RANDOM_GENERATOR = new SecureRandom();
+    private static final Random RANDOM = new Random();
+
     public static void main(String[] args) {
+        runTestCases();
+    }
+
+    private static void checkPerformance() {
+        int amount = 5_000;
+        int bound = 1000;
+        int[] target = new int[amount];
+
+        for (int i = 0; i < amount; i++) {
+            target[i] = RANDOM.nextInt(bound) + 1;
+        }
+        int result = getHIndex(target);
+    }
+
+    private static void runTestCases() {
         List<TestCaseArray> testCases = List.of(
                 new TestCaseArray(0, new int[]{}),
                 new TestCaseArray(3, new int[]{9, 7, 6, 2, 1}),
@@ -64,6 +84,11 @@ public class IndexH {
                 break;
             }
         }
+        return hIndex;
+    }
+
+    private static int getHIndex2(int[] citations) {
+        int hIndex = 0;
         return hIndex;
     }
 
