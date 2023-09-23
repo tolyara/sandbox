@@ -40,13 +40,13 @@ public class IndexH {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-        runTestCases();
-//        checkPerformance();
+//        runTestCases();
+        checkPerformance();
     }
 
     private static void checkPerformance() {
-//        int arrayLength = 200_000;  // getHIndex : 607
-        int arrayLength = 200_000;  // getHIndex2 : ?
+//        int arrayLength = 200_000;  // getHIndex O(n2) : ~ 607
+        int arrayLength = 200_000;  // getHIndex2 O(n) : ~ 36
 
         int bound = 1000;
         int[] targetArray = new int[arrayLength];
