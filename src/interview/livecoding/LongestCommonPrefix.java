@@ -2,13 +2,42 @@ package interview.livecoding;
 
 import interview.livecoding.fortest.TestCaseArrayStr;
 import interview.livecoding.fortest.TestUtil;
+import interview.performance.PerformanceMeasurer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {
-        runTestCases();
+//        runTestCases();
+        checkPerformance();
+    }
+
+    private static void checkPerformance() {
+//        int arrayLength = 200_000;  // getHIndex O(n2) : ~
+        int arrayLength = 200_000;  // getHIndex2 O(n) : ~
+
+        String[] targetArray = new String[arrayLength];
+
+        UnaryOperator<String[]> arrayFiller = (array) -> {
+            for (int i = 0; i < arrayLength; i++) {
+                targetArray[i] = generateRandomString();
+            }
+            return array;
+        };
+
+        Consumer<String[]> action = (array) -> {
+            getLongestCommonPrefix(array);
+        };
+
+        List<String[]> list = new ArrayList<>();
+        list.add(targetArray);
+        new PerformanceMeasurer<String[]>(arrayLength).process(list, arrayFiller, action);
     }
 
     private static void runTestCases() {
@@ -62,6 +91,21 @@ public class LongestCommonPrefix {
         }
 
         return result.toString();
+    }
+
+    // Generate Random Alphanumeric String
+    private static String generateRandomString() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        return generatedString;
     }
 
 }

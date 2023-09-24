@@ -57,10 +57,10 @@ public class IndexH {
             return array;
         };
 
-        Consumer<int[]> remover = (set) -> {
-            getHIndex2(targetArray);
+        Consumer<int[]> action = (array) -> {
+            getHIndex2(array);
         };
-        new PerformanceMeasurer<int[]>(arrayLength).process(Arrays.asList(targetArray), arrayFiller, remover);
+        new PerformanceMeasurer<int[]>(arrayLength).process(List.of(targetArray), arrayFiller, action);
     }
 
     private static void runTestCases() {
