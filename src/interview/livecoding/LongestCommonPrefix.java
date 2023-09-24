@@ -19,8 +19,8 @@ public class LongestCommonPrefix {
     }
 
     private static void checkPerformance() {
-//        int arrayLength = 200_000;  // getHIndex O(n2) : ~
-        int arrayLength = 200_000;  // getHIndex2 O(n) : ~
+//        int arrayLength = 20_000_000;  // getLongestCommonPrefix O(n2) : ~ 93
+        int arrayLength = 20_000_000;  // getLongestCommonPrefix2 O(n) : ~
 
         String[] targetArray = new String[arrayLength];
 
@@ -32,7 +32,7 @@ public class LongestCommonPrefix {
         };
 
         Consumer<String[]> action = (array) -> {
-            getLongestCommonPrefix(array);
+            getLongestCommonPrefix2(array);
         };
 
         List<String[]> list = new ArrayList<>();
@@ -49,11 +49,12 @@ public class LongestCommonPrefix {
                 new TestCaseArrayStr("windows", new String[]{"windows", "windows_10", "windows_11"}),
                 new TestCaseArrayStr("win", new String[]{"windows", "windows_10", "win_11"}),
                 new TestCaseArrayStr("duplicate", new String[]{"duplicate", "duplicate"}),
-                new TestCaseArrayStr("Passed", new String[]{"Passed"})
+                new TestCaseArrayStr("Passed", new String[]{"Passed"}),
+                new TestCaseArrayStr("", new String[]{"", "", ""})
         );
 
         testCases.forEach((t) -> {
-            String result = getLongestCommonPrefix(t.getTarget());
+            String result = getLongestCommonPrefix2(t.getTarget());
             TestUtil.printTestResult(t.getExpected(), result);
         });
     }
@@ -63,9 +64,12 @@ public class LongestCommonPrefix {
 
         int minLength = values[0].length();
         for (int i = 1; i < values.length; i++) {
-            if (values[i].length() < minLength) {
-                minLength = values[i].length();
-            }
+
+//            if (values[i].length() < minLength) {
+//                minLength = values[i].length();
+//            }
+
+            minLength = Math.min(values[i].length(), minLength);
         }
 //        System.out.println(minLength);
 
@@ -90,6 +94,33 @@ public class LongestCommonPrefix {
             }
         }
 
+        return result.toString();
+    }
+
+    private static String getLongestCommonPrefix2(String[] values) {
+        StringBuilder result = new StringBuilder();
+        int minLength = values[0].length();
+
+        for (int i = 0; i < minLength; i++) {
+            char c = values[0].charAt(i);
+            boolean matched = true;
+
+            for (int j = 1; j < values.length; j++) {
+                if (j == 1) {
+                    minLength = Math.min(values[j].length(), minLength);    // determine shortest value's length in first iteration
+                }
+
+                if (values[j].charAt(i) != c) {
+                    matched = false;
+                    break;
+                }
+            }
+            if (matched) {
+                result.append(c);
+            } else {
+                break;
+            }
+        }
         return result.toString();
     }
 
