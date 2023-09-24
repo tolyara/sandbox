@@ -19,14 +19,15 @@ public class LongestCommonPrefix {
     }
 
     private static void checkPerformance() {
-//        int arrayLength = 20_000_000;  // getLongestCommonPrefix O(n2) : ~ 93
-        int arrayLength = 20_000_000;  // getLongestCommonPrefix2 O(n) : ~
+//        int arrayLength = 20_000_000;  // getLongestCommonPrefix :  ~ 831
+        int arrayLength = 20_000_000;    // getLongestCommonPrefix2 : ~ 886
 
         String[] targetArray = new String[arrayLength];
 
         UnaryOperator<String[]> arrayFiller = (array) -> {
             for (int i = 0; i < arrayLength; i++) {
-                targetArray[i] = generateRandomString();
+//                array[i] = generateRandomString();
+                array[i] = "checkPerformance";
             }
             return array;
         };
@@ -101,6 +102,11 @@ public class LongestCommonPrefix {
         StringBuilder result = new StringBuilder();
         int minLength = values[0].length();
 
+//        for (int i = 0; i < minLength; i++) {
+//            System.out.print(values[i] + " ");
+//        }
+//        System.out.println();
+
         for (int i = 0; i < minLength; i++) {
             char c = values[0].charAt(i);
             boolean matched = true;
@@ -131,12 +137,11 @@ public class LongestCommonPrefix {
         int targetStringLength = 10;
         Random random = new Random();
 
-        String generatedString = random.ints(leftLimit, rightLimit + 1)
+        return random.ints(leftLimit, rightLimit + 1)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-        return generatedString;
     }
 
 }
