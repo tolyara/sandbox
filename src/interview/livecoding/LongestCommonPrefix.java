@@ -1,26 +1,31 @@
 package interview.livecoding;
 
-import java.util.Map;
+import interview.livecoding.fortest.TestCaseArrayStr;
+import interview.livecoding.fortest.TestUtil;
+
+import java.util.List;
 
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {
-        var bundle = Map.of(
-                "fl", new String[]{"flower", "flow", "flight"},
-                "prog", new String[]{"progenitive", "prognathouse", "prognosis"},
-                "", new String[]{"dog", "racecar", "car"},
-                "java", new String[]{"java_9", "java", "java_11", "java_17"},
-                "windows", new String[]{"windows", "windows_10", "windows_11"},
-                "win", new String[]{"windows", "windows_10", "win_11"},
-                "duplicate", new String[]{"duplicate", "duplicate"},
-                "Passed", new String[]{"Passed"}
+        runTestCases();
+    }
 
-//                "fl", new String[]{"flower", "flow", "flight"}
-//                "java", new String[]{"java_9", "java", "java_11", "java_17"}
-                );
-        bundle.forEach((k, v) -> {
-            var result = getLongestCommonPrefix(v);
-            System.out.println("(" + (k.equals(result) ? "+" : "-") + ") " + k + " -> " + result );
+    private static void runTestCases() {
+        List<TestCaseArrayStr> testCases = List.of(
+                new TestCaseArrayStr("fl", new String[]{"flower", "flow", "flight"}),
+                new TestCaseArrayStr("prog", new String[]{"progenitive", "prognathouse", "prognosis"}),
+                new TestCaseArrayStr("", new String[]{"dog", "racecar", "car"}),
+                new TestCaseArrayStr("java", new String[]{"java_9", "java", "java_11", "java_17"}),
+                new TestCaseArrayStr("windows", new String[]{"windows", "windows_10", "windows_11"}),
+                new TestCaseArrayStr("win", new String[]{"windows", "windows_10", "win_11"}),
+                new TestCaseArrayStr("duplicate", new String[]{"duplicate", "duplicate"}),
+                new TestCaseArrayStr("Passed", new String[]{"Passed"})
+        );
+
+        testCases.forEach((t) -> {
+            String result = getLongestCommonPrefix(t.getTarget());
+            TestUtil.printTestResult(t.getExpected(), result);
         });
     }
 
