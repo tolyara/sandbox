@@ -1,10 +1,9 @@
 package interview.livecoding.leetcode;
 
-import interview.livecoding.fortest.TestCaseArray;
+import interview.livecoding.fortest.TestCaseArrayInt;
 import interview.livecoding.fortest.TestUtil;
 import interview.performance.PerformanceMeasurer;
 
-import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
@@ -65,13 +64,13 @@ public class IndexH {
     }
 
     private static void runTestCases() {
-        List<TestCaseArray> testCases = List.of(
-                new TestCaseArray(0, new int[]{}),
-                new TestCaseArray(3, new int[]{9, 7, 6, 2, 1}),
-                new TestCaseArray(1, new int[]{1, 3, 1}),
-                new TestCaseArray(3, new int[]{3, 0, 6, 1, 5}),
-                new TestCaseArray(7, new int[]{14, 5, 1, 1, 5, 4, 3, 11, 8, 7, 7, 6, 2, 6, 20, 3, 3, 18, 19, 0}),
-                new TestCaseArray(2, new int[]{25, 0, 0, 1, 80})
+        List<TestCaseArrayInt> testCases = List.of(
+                new TestCaseArrayInt(0, new int[]{}),
+                new TestCaseArrayInt(3, new int[]{9, 7, 6, 2, 1}),
+                new TestCaseArrayInt(1, new int[]{1, 3, 1}),
+                new TestCaseArrayInt(3, new int[]{3, 0, 6, 1, 5}),
+                new TestCaseArrayInt(7, new int[]{14, 5, 1, 1, 5, 4, 3, 11, 8, 7, 7, 6, 2, 6, 20, 3, 3, 18, 19, 0}),
+                new TestCaseArrayInt(2, new int[]{25, 0, 0, 1, 80})
         );
 
         testCases.forEach((t) -> {
