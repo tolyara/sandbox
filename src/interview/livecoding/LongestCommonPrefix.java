@@ -41,7 +41,7 @@ public class LongestCommonPrefix {
 
         List<String[]> list = new ArrayList<>();
         list.add(targetArray);
-        new PerformanceMeasurer<String[]>(arrayLength).process(list, arrayFiller, action);
+        new PerformanceMeasurer<String[]>().process(list, arrayFiller, action);
     }
 
     private static void runTestCases() {

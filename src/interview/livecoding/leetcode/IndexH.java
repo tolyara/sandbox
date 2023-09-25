@@ -60,7 +60,7 @@ public class IndexH {
         Consumer<int[]> action = (array) -> {
             getHIndex2(array);
         };
-        new PerformanceMeasurer<int[]>(arrayLength).process(List.of(targetArray), arrayFiller, action);
+        new PerformanceMeasurer<int[]>().process(List.of(targetArray), arrayFiller, action);
     }
 
     private static void runTestCases() {

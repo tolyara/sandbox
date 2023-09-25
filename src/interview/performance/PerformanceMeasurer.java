@@ -6,10 +6,7 @@ import java.util.function.UnaryOperator;
 
 public class PerformanceMeasurer<O> {
 
-    private int iterations;
-
-    public PerformanceMeasurer(int iterations) {
-        this.iterations = iterations;
+    public PerformanceMeasurer() {
     }
 
     public void process(Collection<O> objects, UnaryOperator<O> preparer, Consumer<O> targetOperationAcceptor) {

@@ -42,7 +42,7 @@ public class SetPerformance {
                 set.add(str);
             }
         };
-        new PerformanceMeasurer<Set<String>>(iterations).process(Arrays.asList(new HashSet<>(), new TreeSet<>()), set -> set, inserter);
+        new PerformanceMeasurer<Set<String>>().process(Arrays.asList(new HashSet<>(), new TreeSet<>()), set -> set, inserter);
     }
 
     /*
@@ -58,7 +58,7 @@ public class SetPerformance {
                 set.remove(String.valueOf(i));
             }
         };
-        new PerformanceMeasurer<Set<String>>(iterations).process(Arrays.asList(new HashSet<>(), new TreeSet<>()), setFiller, remover);
+        new PerformanceMeasurer<Set<String>>().process(Arrays.asList(new HashSet<>(), new TreeSet<>()), setFiller, remover);
     }
 
 }

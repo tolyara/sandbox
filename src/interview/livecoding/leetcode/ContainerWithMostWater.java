@@ -14,8 +14,8 @@ public class ContainerWithMostWater {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-        runTestCases();
-//        checkPerformance();
+//        runTestCases();
+        checkPerformance();
     }
 
     private static void runTestCases() {
@@ -51,7 +51,7 @@ public class ContainerWithMostWater {
         Consumer<int[]> action = (array) -> {
             getMaxArea(array);
         };
-        new PerformanceMeasurer<int[]>(arrayLength).process(List.of(targetArray), arrayFiller, action);
+        new PerformanceMeasurer<int[]>().process(List.of(targetArray), arrayFiller, action);
     }
 
     public static int getMaxArea(int[] heights) {
