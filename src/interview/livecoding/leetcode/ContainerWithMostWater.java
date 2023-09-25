@@ -29,14 +29,16 @@ public class ContainerWithMostWater {
         );
 
         testCases.forEach((t) -> {
-            int result = getMaxArea(t.getTarget());
+            int result = getMaxArea2(t.getTarget());
             TestUtil.printTestResult(t.getExpected(), result);
         });
     }
 
     private static void checkPerformance() {
 //        int arrayLength = 200_000;  // getMaxArea O(n2) : ~ 89026
-        int arrayLength = 20_000;  // getMaxArea O(n2) : ~ 1006
+//        int arrayLength = 20_000;  // getMaxArea O(n2) : ~ 1006
+
+        int arrayLength = 20_000;  // getMaxArea2 O(n) : ~ 2
 
         int bound = 10000;
         int[] targetArray = new int[arrayLength];
@@ -49,7 +51,7 @@ public class ContainerWithMostWater {
         };
 
         Consumer<int[]> action = (array) -> {
-            getMaxArea(array);
+            getMaxArea2(array);
         };
         new PerformanceMeasurer<int[]>().process(List.of(targetArray), arrayFiller, action);
     }
@@ -62,8 +64,8 @@ public class ContainerWithMostWater {
                 if (i == j) continue;   // skip comparing the value to itself
                 int length = Math.abs(j - i);
                 int height = Math.min(heights[i], heights[j]);
-                int tempMaxArea = length * height;
-                maxArea = Math.max(maxArea, tempMaxArea);
+                int currentArea = length * height;
+                maxArea = Math.max(maxArea, currentArea);
             }
         }
         return maxArea;
@@ -71,7 +73,18 @@ public class ContainerWithMostWater {
 
     public static int getMaxArea2(int[] heights) {
         int maxArea = 0;
+        int i = 0;
+        int j = heights.length - 1;
 
+        while (i < j) {
+            int currentArea = (j - i) * Math.min(heights[i], heights[j]);
+            maxArea = Math.max(maxArea, currentArea);
+            if (heights[i] < heights[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
         return maxArea;
     }
 
