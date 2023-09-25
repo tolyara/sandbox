@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  *
+ * https://www.baeldung.com/java-two-pointer-technique#:~:text=In%20the%20two%2Dpointer%20approach,end%20until%20they%20both%20meet
+ *
  * In the two-pointer approach, pointers refer to an array’s indexes. By using pointers, we can process two elements per loop, instead of just one.
  *
  * Common patterns in the two-pointer approach involve: *
