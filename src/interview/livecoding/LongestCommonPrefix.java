@@ -14,26 +14,29 @@ import java.util.function.UnaryOperator;
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {
-        runTestCases();
-//        checkPerformance();
+//        runTestCases();
+        checkPerformance();
     }
 
     private static void checkPerformance() {
 //        int arrayLength = 20_000_000;  // getLongestCommonPrefix :  ~ 831
-        int arrayLength = 20_000_000;    // getLongestCommonPrefix2 : ~ 886
+//        int arrayLength = 20_000_000;    // getLongestCommonPrefix2 : ~ 886
+
+//        int arrayLength = 20_000_000;    // array[i] = "checkPerformance"; getLongestCommonPrefix3 : ~ 103
+        int arrayLength = 20_000_000;    //  array[i] = generateRandomString(); getLongestCommonPrefix3 : ~ 22386
 
         String[] targetArray = new String[arrayLength];
 
         UnaryOperator<String[]> arrayFiller = (array) -> {
             for (int i = 0; i < arrayLength; i++) {
-//                array[i] = generateRandomString();
-                array[i] = "checkPerformance";
+                array[i] = generateRandomString();
+//                array[i] = "checkPerformance";
             }
             return array;
         };
 
         Consumer<String[]> action = (array) -> {
-            getLongestCommonPrefix3(array);
+            getLongestCommonPrefix2(array);
         };
 
         List<String[]> list = new ArrayList<>();
@@ -135,7 +138,9 @@ public class LongestCommonPrefix {
         Arrays.sort(values);
         String first = values[0];
         String last = values[values.length - 1];
-        for (int i = 0; i < Math.min(first.length(), last.length()); i++) {
+        int minLength = Math.min(first.length(), last.length());
+
+        for (int i = 0; i < minLength; i++) {
             if (first.charAt(i) != last.charAt(i)) {
                 return ans.toString();
             }
