@@ -14,8 +14,8 @@ import java.util.function.UnaryOperator;
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {
-//        runTestCases();
-        checkPerformance();
+        runTestCases();
+//        checkPerformance();
     }
 
     private static void checkPerformance() {
@@ -33,7 +33,7 @@ public class LongestCommonPrefix {
         };
 
         Consumer<String[]> action = (array) -> {
-            getLongestCommonPrefix2(array);
+            getLongestCommonPrefix3(array);
         };
 
         List<String[]> list = new ArrayList<>();
@@ -55,7 +55,7 @@ public class LongestCommonPrefix {
         );
 
         testCases.forEach((t) -> {
-            String result = getLongestCommonPrefix2(t.getTarget());
+            String result = getLongestCommonPrefix3(t.getTarget());
             TestUtil.printTestResult(t.getExpected(), result);
         });
     }
@@ -128,6 +128,20 @@ public class LongestCommonPrefix {
             }
         }
         return result.toString();
+    }
+
+    private static String getLongestCommonPrefix3(String[] values) {
+        StringBuilder ans = new StringBuilder();
+        Arrays.sort(values);
+        String first = values[0];
+        String last = values[values.length - 1];
+        for (int i = 0; i < Math.min(first.length(), last.length()); i++) {
+            if (first.charAt(i) != last.charAt(i)) {
+                return ans.toString();
+            }
+            ans.append(first.charAt(i));
+        }
+        return ans.toString();
     }
 
     // Generate Random Alphanumeric String
