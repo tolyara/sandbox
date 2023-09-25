@@ -36,12 +36,15 @@ public class TwoPointerTechnique {
         });
     }
 
-    private static boolean sumExistsInArray(int[] input, int targetValue) {
+    /*
+        Problem: Given a sorted array of integers, we need to see if there are two numbers in it such that their sum is equal to a specific value.
+     */
+    private static boolean sumExistsInArray(int[] sortedArray, int targetValue) {
         int pointerOne = 0;
-        int pointerTwo = input.length - 1;
+        int pointerTwo = sortedArray.length - 1;
 
         while (pointerOne < pointerTwo) {
-            int sum = input[pointerOne] + input[pointerTwo];
+            int sum = sortedArray[pointerOne] + sortedArray[pointerTwo];
 
             if (sum == targetValue) {
                 return true;
