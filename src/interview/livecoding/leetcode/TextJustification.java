@@ -71,9 +71,9 @@ public class TextJustification {
     private static final String SPACE = " ";
 
     public static void main(String[] args) {
-//        List<String> list = fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
+        List<String> list = fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
 
-        List<String> list = fullJustify(new String[]{"What","must","be","acknowledgment","shall","be"}, 16);
+//        List<String> list = fullJustify(new String[]{"What","must","be","acknowledgment","shall","be"}, 16);
 
 //        List<String> list = fullJustify(new String[]{"Science","is","what","we","understand","well","enough","to","explain","to","a","computer.",
 //                "Art","is","everything","else","we","do"}, 20);
@@ -106,7 +106,8 @@ public class TextJustification {
                 lineBuilder.append(words[i]);
             }
             if (i == words.length - 1) {
-                result.add(lineBuilder.toString());
+                String line = lineBuilder.toString();
+                result.add(addExtraSpacesToEnd(line, maxWidth - line.length()));
             }
         }
         return result;
@@ -120,9 +121,7 @@ public class TextJustification {
 
         result.append(words[0]);
         if (words.length == 1) {
-            for (int j = 0; j < extraSpaces; j++) {
-                result.append(" ");
-            }
+            return addExtraSpacesToEnd(result.toString(), extraSpaces);
         } else {
             int extraSpacesPerSlot = spaceSlots > 0 ? extraSpaces / spaceSlots : 0;
             int extraSpaceLeftovers = spaceSlots > 0 ? extraSpaces % spaceSlots : 0;
@@ -145,6 +144,15 @@ public class TextJustification {
             throw new RuntimeException("Final line is not correct. ;" + resultStr + "; " + maxWidth);   // for test
         }
         return resultStr;
+    }
+
+    private static String addExtraSpacesToEnd(String str, int extraSpaces) {
+        StringBuilder result = new StringBuilder();
+        result.append(str);
+        for (int j = 0; j < extraSpaces; j++) {
+            result.append(" ");
+        }
+        return result.toString();
     }
 
 }
