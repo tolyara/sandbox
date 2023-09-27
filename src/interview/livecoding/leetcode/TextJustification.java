@@ -68,6 +68,8 @@ import java.util.List;
  */
 public class TextJustification {
 
+    private static final String SPACE = " ";
+
     public static void main(String[] args) {
 //        List<String> list = fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
 
@@ -97,9 +99,9 @@ public class TextJustification {
         lineBuilder.append(words[0]);
         for (int i = 1; i < words.length; i++) {
             if (lineBuilder.length() + words[i].length() < maxWidth) {
-                lineBuilder.append(" ").append(words[i]);
+                lineBuilder.append(SPACE).append(words[i]);
             } else {
-                result.add(lineBuilder.toString());
+                result.add(justifyWithSpaces(lineBuilder.toString(), maxWidth));
                 lineBuilder = new StringBuilder();
                 lineBuilder.append(words[i]);
             }
@@ -108,6 +110,35 @@ public class TextJustification {
             }
         }
         return result;
+    }
+
+    private static String justifyWithSpaces(String str, int maxWidth) {
+        StringBuilder result = new StringBuilder();
+        String[] words = str.split(SPACE);
+        int spaceSlots = words.length == 1 ? 1 : words.length - 1;
+
+        int extraSpaces = maxWidth - str.length();
+        int extraSpacesPerSlot = spaceSlots > 0 ? extraSpaces / spaceSlots : 0;
+        int extraSpaceLeftovers = spaceSlots > 0 ? extraSpaces % spaceSlots : 0;
+
+        result.append(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            result.append(SPACE);
+            for (int j = 0; j < extraSpacesPerSlot; j++) {
+                result.append(" ");
+            }
+            if (extraSpaceLeftovers > 0) {
+                result.append(" ");
+                extraSpaceLeftovers--;
+            }
+            result.append(words[i]);
+        }
+
+        String resultStr = result.toString();
+        if (resultStr.length() != maxWidth) {
+            throw new RuntimeException("Final line is not correct. ;" + resultStr + "; " + maxWidth);   // for test
+        }
+        return resultStr;
     }
 
 }
