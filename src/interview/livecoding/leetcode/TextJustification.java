@@ -89,13 +89,16 @@ public class TextJustification {
 
         StringBuilder lineBuilder = new StringBuilder();
         for (int i = 0; i < words.length; i++) {
-            if (lineBuilder.length() <= maxWidth) {
-                lineBuilder.append(lineBuilder.length() == 0 ? "" : " ");
-                lineBuilder.append(words[i]);
+            String next = (lineBuilder.length() == 0 ? "" : " ") + words[i];
+            if (lineBuilder.length() + next.length() < maxWidth) {
+//                lineBuilder.append(lineBuilder.length() == 0 ? "" : " ");
+//                lineBuilder.append(words[i]);
+                lineBuilder.append(next);
             } else {
                 result.add(lineBuilder.toString());
                 lineBuilder = new StringBuilder();
-                lineBuilder.append(lineBuilder.length() == 0 ? "" : " ");
+//                lineBuilder.append(lineBuilder.length() == 0 ? "" : " ");
+//                lineBuilder.append(words[i]);
                 lineBuilder.append(words[i]);
             }
             if (i == words.length - 1) {
