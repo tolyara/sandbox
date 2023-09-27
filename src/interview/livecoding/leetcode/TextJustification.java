@@ -69,7 +69,13 @@ import java.util.List;
 public class TextJustification {
 
     public static void main(String[] args) {
-        List<String> list = fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
+//        List<String> list = fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
+
+        List<String> list = fullJustify(new String[]{"What","must","be","acknowledgment","shall","be"}, 16);
+
+//        List<String> list = fullJustify(new String[]{"Science","is","what","we","understand","well","enough","to","explain","to","a","computer.",
+//                "Art","is","everything","else","we","do"}, 20);
+
         for (String s : list) {
             System.out.println(s);
         }
@@ -88,17 +94,13 @@ public class TextJustification {
         List<String> result = new ArrayList<>();
 
         StringBuilder lineBuilder = new StringBuilder();
-        for (int i = 0; i < words.length; i++) {
-            String next = (lineBuilder.length() == 0 ? "" : " ") + words[i];
-            if (lineBuilder.length() + next.length() < maxWidth) {
-//                lineBuilder.append(lineBuilder.length() == 0 ? "" : " ");
-//                lineBuilder.append(words[i]);
-                lineBuilder.append(next);
+        lineBuilder.append(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            if (lineBuilder.length() + words[i].length() < maxWidth) {
+                lineBuilder.append(" ").append(words[i]);
             } else {
                 result.add(lineBuilder.toString());
                 lineBuilder = new StringBuilder();
-//                lineBuilder.append(lineBuilder.length() == 0 ? "" : " ");
-//                lineBuilder.append(words[i]);
                 lineBuilder.append(words[i]);
             }
             if (i == words.length - 1) {
