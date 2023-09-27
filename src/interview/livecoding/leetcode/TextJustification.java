@@ -115,23 +115,29 @@ public class TextJustification {
     private static String justifyWithSpaces(String str, int maxWidth) {
         StringBuilder result = new StringBuilder();
         String[] words = str.split(SPACE);
-        int spaceSlots = words.length == 1 ? 1 : words.length - 1;
-
+        int spaceSlots = words.length - 1;
         int extraSpaces = maxWidth - str.length();
-        int extraSpacesPerSlot = spaceSlots > 0 ? extraSpaces / spaceSlots : 0;
-        int extraSpaceLeftovers = spaceSlots > 0 ? extraSpaces % spaceSlots : 0;
 
         result.append(words[0]);
-        for (int i = 1; i < words.length; i++) {
-            result.append(SPACE);
-            for (int j = 0; j < extraSpacesPerSlot; j++) {
+        if (words.length == 1) {
+            for (int j = 0; j < extraSpaces; j++) {
                 result.append(" ");
             }
-            if (extraSpaceLeftovers > 0) {
-                result.append(" ");
-                extraSpaceLeftovers--;
+        } else {
+            int extraSpacesPerSlot = spaceSlots > 0 ? extraSpaces / spaceSlots : 0;
+            int extraSpaceLeftovers = spaceSlots > 0 ? extraSpaces % spaceSlots : 0;
+
+            for (int i = 1; i < words.length; i++) {
+                result.append(SPACE);
+                for (int j = 0; j < extraSpacesPerSlot; j++) {
+                    result.append(" ");
+                }
+                if (extraSpaceLeftovers > 0) {
+                    result.append(" ");
+                    extraSpaceLeftovers--;
+                }
+                result.append(words[i]);
             }
-            result.append(words[i]);
         }
 
         String resultStr = result.toString();
