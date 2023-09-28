@@ -33,7 +33,7 @@ public class TrappingRainWater {
                 new TestCaseArrayInt(0, new int[]{1, 1}),
                 new TestCaseArrayInt(1, new int[]{1, 0, 1}),
                 new TestCaseArrayInt(6, new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}),
-                new TestCaseArrayInt(9, new int[]{14, 2, 0, 3, 2, 5})
+                new TestCaseArrayInt(9, new int[]{4, 2, 0, 3, 2, 5})
         );
 
         testCases.forEach((t) -> {
@@ -44,33 +44,27 @@ public class TrappingRainWater {
 
     public static int getMaxTrappedWaterVolume(int[] heights) {
         int result = 0;
+        if (heights.length <= 2) return 0;
 
-        boolean slotIsForming = false;
-        int startEdgeHeight = 0;
+        int startEdgeHeight = heights[0];
         int endEdgeHeight = 0;
         int startEdgeIndex = 0;
         int endEdgeIndex = 0;
 
         for (int i = 1; i < heights.length; i++) {
-//            if (heights[i] < heights[i - 1]) {
-            if (heights[i] >= heights[i - 1]) {
-                slotIsForming = false;
+            if (heights[i] >= startEdgeHeight) {
                 endEdgeIndex = i;
                 endEdgeHeight = heights[i];
 
                 int slotLength = endEdgeIndex - startEdgeIndex - 1;
-                if (slotLength > 2) {
+                if (slotLength > 0) {
                     int slotHeight = Math.min(startEdgeHeight, endEdgeHeight);
-                    for (int j = startEdgeIndex + 1; j < endEdgeIndex - 1; j++) {
-                        int waterVolume = slotHeight - heights[i];
+                    for (int j = startEdgeIndex + 1; j < endEdgeIndex; j++) {
+                        int waterVolume = slotHeight - heights[j];
                         result += waterVolume;
                     }
                 }
 
-//                result += heights[i] - heights[i - 1];  startEdgeHeight == 0 &&
-
-            } else {
-                slotIsForming = true;
                 startEdgeHeight = heights[i];
                 startEdgeIndex = i;
             }
