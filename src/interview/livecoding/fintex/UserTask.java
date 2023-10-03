@@ -43,9 +43,13 @@ public class UserTask {
 
         Optional<User> userOptional = Optional.ofNullable(user);
 
-        Optional<String> resultUserEmail = userOptional.filter(u -> !u.isAdmin).map(u -> u.getEmail().map(e -> e). orElse("default@gmail.com"));
+        String result = userOptional.filter(u -> !u.isAdmin).map(u -> u.getEmail())
+                .map(e -> "myname" + e.get().split("@")[1])
+                .orElse("default@gmail.com");
 
         // TODO use optional.flatmap
+
+        System.out.println(result);
     }
 
 }
