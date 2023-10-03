@@ -39,6 +39,8 @@ public class UserTask {
 
     }
 
+    public static final String at = "@";
+
     // admin false, in
 
     // Using initial code call User getEmail method and then using Optional class filter out admin users
@@ -49,30 +51,40 @@ public class UserTask {
 
     private static void runTestCases() {
         List<TestCaseString> testCases = List.of(
-                new TestCaseString("default@gmail.com", null),
-                new TestCaseString("default@gmail.com", new User(false, null)),
-                new TestCaseString("tony@gmail.com", new User(false, "someemail@gmail.com")),
-                new TestCaseString("default@gmail.com", new User(true, "admin@gmail.com"))
+                new TestCaseString("default@gmail.com", Optional.empty()),
+                new TestCaseString("default@gmail.com", Optional.of(new User(false, null))),
+                new TestCaseString("tony@gmail.com", Optional.of(new User(false, "someemail@gmail.com"))),
+                new TestCaseString("default@gmail.com", Optional.of(new User(true, "admin@gmail.com")))
         );
 
         testCases.forEach((t) -> {
-            String result = getEmail((User) t.getTarget());
+            String result = getEmail((Optional<User>) t.getTarget());
             TestUtil.printTestResult(t.getExpected(), result);
         });
     }
 
-    private static String getEmail(User user) {
+    private static String getEmail(Optional<User> user) {
         String replacement = "tony";
         String defaultEmail = "default@gmail.com";
 
-        Optional<User> userOptional = Optional.ofNullable(user);
-        String result = userOptional.filter(u -> !u.isAdmin).map(u -> u.getEmail())
-                .map(e -> e.map(email -> replacement + "@" + email.split("@")[1]).orElse(defaultEmail))
+//        Optional<User> userOptional = Optional.ofNullable(user);
+
+        return user.filter(u -> !u.isAdmin).map(u -> u.getEmail())
+                .map(e -> e.map(email -> replacement + at + email.split(at)[1]).orElse(defaultEmail))
                 .orElse(defaultEmail);
+    }
 
-        // TODO use optional.flatmap
+    /**
+     * https://stackoverflow.com/questions/30864583/what-is-the-difference-between-optional-flatmap-and-optional-map
+     *  You only need to use 'flatMap' when you're facing nested Optionals.
+     */
+    private static String getEmail2(Optional<User> user) {
+        String replacement = "tony";
+        String defaultEmail = "default@gmail.com";
 
-        return result;
+        return user.filter(u -> !u.isAdmin).flatMap(u -> u.getEmail())
+                .map(e -> replacement + at + e.split(at)[1])
+                .orElse(defaultEmail);
     }
 
 }
