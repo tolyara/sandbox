@@ -1,5 +1,10 @@
 package interview.livecoding.fintex;
 
+import interview.livecoding.fortest.TestCaseArrayInt;
+import interview.livecoding.fortest.TestCaseString;
+import interview.livecoding.fortest.TestUtil;
+
+import java.util.List;
 import java.util.Optional;
 
 public class UserTask {
@@ -39,17 +44,35 @@ public class UserTask {
     // Using initial code call User getEmail method and then using Optional class filter out admin users
     // and then if email present then change email part before @ symbol to your name, else return some default email.
     public static void main(String[] args) {
-        User user = new User(false, "email@gmail.com");
+        runTestCases();
+    }
+
+    private static void runTestCases() {
+        List<TestCaseString> testCases = List.of(
+                new TestCaseString("default@gmail.com", null),
+                new TestCaseString("default@gmail.com", new User(false, null)),
+                new TestCaseString("tony@gmail.com", new User(false, "someemail@gmail.com")),
+                new TestCaseString("default@gmail.com", new User(true, "admin@gmail.com"))
+        );
+
+        testCases.forEach((t) -> {
+            String result = getEmail((User) t.getTarget());
+            TestUtil.printTestResult(t.getExpected(), result);
+        });
+    }
+
+    private static String getEmail(User user) {
+        String replacement = "tony";
+        String defaultEmail = "default@gmail.com";
 
         Optional<User> userOptional = Optional.ofNullable(user);
-
         String result = userOptional.filter(u -> !u.isAdmin).map(u -> u.getEmail())
-                .map(e -> "myname" + e.get().split("@")[1])
-                .orElse("default@gmail.com");
+                .map(e -> e.map(email -> replacement + "@" + email.split("@")[1]).orElse(defaultEmail))
+                .orElse(defaultEmail);
 
         // TODO use optional.flatmap
 
-        System.out.println(result);
+        return result;
     }
 
 }
