@@ -19,7 +19,8 @@ public class CompletableFutureExample {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 //        doAsSimpleFuture();
 //        doThenRun();
-        doThenCompose();
+//        doThenCompose();
+        doThenCombine();
     }
 
     private static void doAsSimpleFuture() throws ExecutionException, InterruptedException {
@@ -59,6 +60,27 @@ public class CompletableFutureExample {
 
         TestUtil.printTestResult("Hello World", completableFuture.get());
     }
+
+    private static void doThenCombine() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
+//                    System.out.println("Task 1 started.");
+//                    sleepForAwhile();
+//                    System.out.println("Task 1 finished.");
+                    return "Hello";
+                })
+                .thenCombine(CompletableFuture.supplyAsync(() -> {
+//                    System.out.println("Task 2 started.");
+//                    sleepForAwhile();
+//                    System.out.println("Task 2 finished.");
+                    return " World";
+                }
+        ), (s1, s2) -> s1 + s2);
+
+//        completableFuture.get();
+        TestUtil.printTestResult("Hello World", completableFuture.get());
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     private static void sleepForAwhile() {
         try {
