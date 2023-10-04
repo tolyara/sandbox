@@ -29,11 +29,11 @@ public class TrappingRainWater {
 
     private static void runTestCases() {
         List<TestCaseArrayInt> testCases = List.of(
-//                new TestCaseArrayInt(0, new int[]{}),
-//                new TestCaseArrayInt(0, new int[]{1, 1}),
-//                new TestCaseArrayInt(1, new int[]{1, 0, 1}),
-                new TestCaseArrayInt(6, new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1})
-//                new TestCaseArrayInt(9, new int[]{4, 2, 0, 3, 2, 5})
+                new TestCaseArrayInt(0, new int[]{}),
+                new TestCaseArrayInt(0, new int[]{1, 1}),
+                new TestCaseArrayInt(1, new int[]{1, 0, 1}),
+                new TestCaseArrayInt(6, new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}),
+                new TestCaseArrayInt(9, new int[]{4, 2, 0, 3, 2, 5})
         );
 
         testCases.forEach((t) -> {
@@ -43,12 +43,11 @@ public class TrappingRainWater {
     }
 
     public static int getMaxTrappedWaterVolume(int[] heights) {
-        if (heights.length <= 2) return 0;
+        if (heights.length <= 2) return 0;  // recursion exit condition
 
         int result = 0;
         int startEdgeHeight = heights[0];
         int startEdgeIndex = 0;
-        boolean slotInProgress = true;
 
         for (int i = 1; i < heights.length; i++) {
             if (heights[i] >= startEdgeHeight) {
@@ -63,11 +62,10 @@ public class TrappingRainWater {
 
                 startEdgeHeight = heights[i];
                 startEdgeIndex = i;
-            } else {
-                // TODO if startEdgeHeight bar not exists in further values -> startEdgeHeight = heights[i];
-
-//                startEdgeHeight = heights[i];
-//                startEdgeIndex = i;
+            } else if (i == heights.length - 1) {
+                int[] appendix = new int[heights.length - startEdgeIndex - 1];
+                System.arraycopy(heights, startEdgeIndex + 1, appendix, 0, heights.length - startEdgeIndex - 1);
+                result += getMaxTrappedWaterVolume(appendix);
             }
         }
         return result;
