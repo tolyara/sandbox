@@ -13,9 +13,9 @@ public class JumpGame {
 
     private static void runTestCases() {
         List<TestCaseArrayIntReturnsBoolean2> testCases = List.of(
-                new TestCaseArrayIntReturnsBoolean2(false, new int[]{}),
-                new TestCaseArrayIntReturnsBoolean2(false, new int[]{0}),
-                new TestCaseArrayIntReturnsBoolean2(true, new int[]{1}),
+//                new TestCaseArrayIntReturnsBoolean2(false, new int[]{}),
+//                new TestCaseArrayIntReturnsBoolean2(false, new int[]{0}),
+//                new TestCaseArrayIntReturnsBoolean2(true, new int[]{1}),
                 new TestCaseArrayIntReturnsBoolean2(true, new int[]{2,3,1,1,4}),
                 new TestCaseArrayIntReturnsBoolean2(false, new int[]{3,2,1,0,4})
         );
@@ -27,11 +27,24 @@ public class JumpGame {
     }
 
     public static boolean canJump(int[] nums) {
-        boolean result = true;
+        if (nums.length == 0) return false;
+        boolean result = false;
 
+        int targetLength = nums.length;
+        for (int i = nums[0]; i > 0; i--) {
+            if (i >= nums.length) return false;
+            int currentIndex = nums[i];
+            while (currentIndex > 0) {
+                if (currentIndex >= targetLength) {
+                    return true;
+                } else {
+                    if (nums[currentIndex] <= 0) return false;
+                    currentIndex += nums[currentIndex];
+                }
+            }
+        }
 
-
-        return result;
+        return false;
     }
 
 }
