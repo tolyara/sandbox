@@ -68,7 +68,7 @@ import java.util.List;
  */
 public class TextJustification {
 
-    private static final String SPACE = " ";
+    public static final String SPACE = " ";
 
     public static void main(String[] args) {
         List<String> list = fullJustify(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16);
