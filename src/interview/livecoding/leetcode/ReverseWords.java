@@ -13,8 +13,8 @@ public class ReverseWords {
 
     private static void runTestCases() {
         List<TestCaseArrayString> testCases = List.of(
-//                new TestCaseArrayString("world hello", "  hello world  "),
-//                new TestCaseArrayString("blue is sky the", "the sky is blue"),
+                new TestCaseArrayString("world hello", "  hello world  "),
+                new TestCaseArrayString("blue is sky the", "the sky is blue"),
                 new TestCaseArrayString("example good a", "   a good   example  ")
         );
 
@@ -26,11 +26,14 @@ public class ReverseWords {
 
     public static String reverseWords(String s) {
         StringBuilder result = new StringBuilder();
-        String[] words = s.split(" ");
+        String[] words = s.split(TextJustification.SPACE);
 
-        for (int i = 0; i < words.length; i++) {
+        for (int i = words.length - 1; i >= 0; i--) {
             if (!words[i].isEmpty()) {
-                System.out.println(words[i]);
+                if (!result.isEmpty()) {
+                    result.append(TextJustification.SPACE);
+                }
+                result.append(words[i]);
             }
         }
         return result.toString();
