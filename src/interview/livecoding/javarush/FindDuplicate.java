@@ -17,6 +17,7 @@ public class FindDuplicate {
         elements2.set(50, 20);
         elements2.set(51, 21);
         elements2.set(52, 37);
+        elements2.set(53, 37);
         findDuplicates(elements2);
     }
 
