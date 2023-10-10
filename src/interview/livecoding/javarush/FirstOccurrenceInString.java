@@ -36,6 +36,9 @@ public class FirstOccurrenceInString {
                     return i - needle.length() + 1;
                 }
                 needleIndex++;
+            } else if (needleIndex > 0) {
+                sb = new StringBuilder();
+                needleIndex = 0;
             }
         }
 
