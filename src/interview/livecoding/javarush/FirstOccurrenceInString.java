@@ -14,7 +14,8 @@ public class FirstOccurrenceInString {
     private static void runTestCases() {
         List<TestCaseArrayStrReturnsInt> testCases = List.of(
                 new TestCaseArrayStrReturnsInt(0, new String[] {"sadbutsad", "sad"}),
-                new TestCaseArrayStrReturnsInt(-1, new String[] {"leetcode", "leeto"})
+                new TestCaseArrayStrReturnsInt(-1, new String[] {"leetcode", "leeto"}),
+                new TestCaseArrayStrReturnsInt(4, new String[] {"leetleeto", "leeto"})
         );
 
         testCases.forEach((t) -> {
@@ -39,6 +40,7 @@ public class FirstOccurrenceInString {
             } else if (needleIndex > 0) {
                 sb = new StringBuilder();
                 needleIndex = 0;
+                i--;
             }
         }
 
