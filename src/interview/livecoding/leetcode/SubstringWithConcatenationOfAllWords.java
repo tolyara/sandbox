@@ -1,10 +1,10 @@
 package interview.livecoding.leetcode;
 
-import interview.livecoding.fortest.TestCaseArrayInt;
 import interview.livecoding.fortest.TestCaseArrayStrReturnsListOfInt;
 import interview.livecoding.fortest.TestUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,14 +47,14 @@ import java.util.List;
 public class SubstringWithConcatenationOfAllWords {
 
     public static void main(String[] args) {
-
+        runTestCases();
     }
 
     private static void runTestCases() {
         List<TestCaseArrayStrReturnsListOfInt> testCases = List.of(
-                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo","bar"}),
-                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo","bar"}),
-                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo","bar"})
+                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo", "bar"}, "barfoothefoobarman"),
+                new TestCaseArrayStrReturnsListOfInt(Collections.emptyList(), new String[]{"word", "good", "best", "word"}, "wordgoodgoodgoodbestword"),
+                new TestCaseArrayStrReturnsListOfInt(List.of(6, 9, 12), new String[]{"bar", "foo", "the"}, "barfoofoobarthefoobarman")
         );
 
         testCases.forEach((t) -> {

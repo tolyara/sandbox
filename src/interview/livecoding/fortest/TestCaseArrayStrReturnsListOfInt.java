@@ -4,8 +4,11 @@ import java.util.List;
 
 public class TestCaseArrayStrReturnsListOfInt extends TestCase<List<Integer>, String[]> {
 
-    public TestCaseArrayStrReturnsListOfInt(List<Integer> expected, String[] target) {
+    private final String targetValue;
+
+    public TestCaseArrayStrReturnsListOfInt(List<Integer> expected, String[] target, String targetValue) {
         super(expected, target);
+        this.targetValue = targetValue;
     }
 
 }
