@@ -1,4 +1,4 @@
-package interview.livecoding.javarush;
+package interview.livecoding.leetcode;
 
 import interview.livecoding.fortest.TestCaseArrayStrReturnsInt;
 import interview.livecoding.fortest.TestUtil;

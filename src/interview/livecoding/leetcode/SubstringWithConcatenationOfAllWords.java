@@ -3,9 +3,7 @@ package interview.livecoding.leetcode;
 import interview.livecoding.fortest.TestCaseArrayStrReturnsListOfInt;
 import interview.livecoding.fortest.TestUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -58,15 +56,45 @@ public class SubstringWithConcatenationOfAllWords {
         );
 
         testCases.forEach((t) -> {
-            List<Integer> result = findSubstring(null, t.getTarget());
+            List<Integer> result = findSubstring(t.getTargetValue(), t.getTarget());
             TestUtil.printTestResult(t.getExpected(), result);
         });
     }
 
     public static List<Integer> findSubstring(String s, String[] words) {
         List<Integer> result = new ArrayList<>();
+        int wordLength = words.length;
+        if (words.length == 0 || s.length() < wordLength) return Collections.emptyList();
 
+        Set<String> concatenations = new HashSet<>();
 
+        for (int i = 0; i < words.length; i++) {
+            for (int j = 0; j < words.length; j++) {
+                StringBuilder concatenation = new StringBuilder();
+                concatenation.append(words[i]);
+                if (i == j) continue;
+                concatenation.append(words[j]);
+                concatenations.add(concatenation.toString());
+            }
+        }
+
+        for (String c : concatenations) {
+            System.out.println(c);
+        }
+
+//        for (int i = 0; i < chars.length; i++) {
+//            if (chars[i] == needle.charAt(needleIndex)) {
+//                sb.append(chars[i]);
+//                if (sb.toString().equals(needle)) {
+//                    return i - needle.length() + 1;
+//                }
+//                needleIndex++;
+//            } else if (needleIndex > 0) {
+//                sb = new StringBuilder();
+//                needleIndex = 0;
+//                i--;
+//            }
+//        }
 
         return result;
     }

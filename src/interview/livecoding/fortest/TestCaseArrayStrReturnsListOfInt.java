@@ -11,4 +11,8 @@ public class TestCaseArrayStrReturnsListOfInt extends TestCase<List<Integer>, St
         this.targetValue = targetValue;
     }
 
+    public String getTargetValue() {
+        return targetValue;
+    }
+
 }
