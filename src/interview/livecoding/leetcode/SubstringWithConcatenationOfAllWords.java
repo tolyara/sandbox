@@ -103,10 +103,10 @@ public class SubstringWithConcatenationOfAllWords {
                 String currentWord = words[i];
                 String[] wordsWithoutCurrentWord = new String[words.length - 1];
 
-                if (i > 0) {
+                if (i > 0) {    // copy left side
                     System.arraycopy(words, 0, wordsWithoutCurrentWord, 0, i);
                 }
-                if (i < words.length - 1) {
+                if (i < words.length - 1) {     // copy right side
                     System.arraycopy(words, i + 1, wordsWithoutCurrentWord, i, words.length - 1 - i);
                 }
 
