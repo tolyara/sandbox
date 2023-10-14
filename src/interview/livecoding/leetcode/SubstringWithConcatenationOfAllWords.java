@@ -50,9 +50,10 @@ public class SubstringWithConcatenationOfAllWords {
 
     private static void runTestCases() {
         List<TestCaseArrayStrReturnsListOfInt> testCases = List.of(
-                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo", "bar"}, "barfoothefoobarman"),
-                new TestCaseArrayStrReturnsListOfInt(Collections.emptyList(), new String[]{"word", "good", "best", "word"}, "wordgoodgoodgoodbestword"),
-                new TestCaseArrayStrReturnsListOfInt(List.of(6, 9, 12), new String[]{"bar", "foo", "the"}, "barfoofoobarthefoobarman")
+//                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo", "bar"}, "barfoothefoobarman"),
+//                new TestCaseArrayStrReturnsListOfInt(Collections.emptyList(), new String[]{"word", "good", "best", "word"}, "wordgoodgoodgoodbestword")
+//                new TestCaseArrayStrReturnsListOfInt(List.of(6, 9, 12), new String[]{"bar", "foo", "the"}, "barfoofoobarthefoobarman"),
+                new TestCaseArrayStrReturnsListOfInt(List.of(0), new String[]{"ab", "cd", "ef"}, "abcdef")
         );
 
         testCases.forEach((t) -> {
@@ -66,21 +67,12 @@ public class SubstringWithConcatenationOfAllWords {
         int wordLength = words.length;
         if (words.length == 0 || s.length() < wordLength) return Collections.emptyList();
 
-        Set<String> concatenations = new HashSet<>();
-
-        for (int i = 0; i < words.length; i++) {
-            for (int j = 0; j < words.length; j++) {
-                StringBuilder concatenation = new StringBuilder();
-                concatenation.append(words[i]);
-                if (i == j) continue;
-                concatenation.append(words[j]);
-                concatenations.add(concatenation.toString());
-            }
-        }
+        List<String> concatenations = getAllConcatenationsOfWordPermutation(words);
 
         for (String c : concatenations) {
             System.out.println(c);
         }
+        System.out.println(concatenations.size());
 
 //        for (int i = 0; i < chars.length; i++) {
 //            if (chars[i] == needle.charAt(needleIndex)) {
@@ -96,6 +88,34 @@ public class SubstringWithConcatenationOfAllWords {
 //            }
 //        }
 
+        return result;
+    }
+
+    private static List<String> getAllConcatenationsOfWordPermutation(String[] words) {
+        List<String> result = new ArrayList<>();
+
+        if (words.length == 2) {
+            result.add(words[0] + words[1]);
+            result.add(words[1] + words[0]);
+            return result;
+        } else {
+            for (int i = 0; i < words.length; i++) {
+                String currentWord = words[i];
+                String[] wordsWithoutCurrentWord = new String[words.length - 1];
+
+                if (i > 0) {
+                    System.arraycopy(words, 0, wordsWithoutCurrentWord, 0, i);
+                }
+                if (i < words.length - 1) {
+                    System.arraycopy(words, i + 1, wordsWithoutCurrentWord, i, words.length - 1 - i);
+                }
+
+                List<String> list = getAllConcatenationsOfWordPermutation(wordsWithoutCurrentWord);
+                for (String s : list) {
+                    result.add(currentWord + s);
+                }
+            }
+        }
         return result;
     }
 
