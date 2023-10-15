@@ -48,4 +48,9 @@ public class FirstOccurrenceInString {
 //        haystack.contains(needle)
     }
 
+    public static int getFirstOccurrenceIndex2(String haystack, String needle) {
+        List<Integer> indexes = SubstringWithConcatenationOfAllWords.getOccurrenceIndexes(haystack, needle);
+        return indexes.isEmpty() ? -1 : indexes.get(0);
+    }
+
 }
