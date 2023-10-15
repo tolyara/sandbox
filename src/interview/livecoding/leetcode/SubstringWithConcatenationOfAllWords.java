@@ -50,43 +50,53 @@ public class SubstringWithConcatenationOfAllWords {
 
     private static void runTestCases() {
         List<TestCaseArrayStrReturnsListOfInt> testCases = List.of(
-//                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo", "bar"}, "barfoothefoobarman"),
-//                new TestCaseArrayStrReturnsListOfInt(Collections.emptyList(), new String[]{"word", "good", "best", "word"}, "wordgoodgoodgoodbestword")
-//                new TestCaseArrayStrReturnsListOfInt(List.of(6, 9, 12), new String[]{"bar", "foo", "the"}, "barfoofoobarthefoobarman"),
+                new TestCaseArrayStrReturnsListOfInt(List.of(0, 9), new String[]{"foo", "bar"}, "barfoothefoobarman"),
+                new TestCaseArrayStrReturnsListOfInt(Collections.emptyList(), new String[]{"word", "good", "best", "word"}, "wordgoodgoodgoodbestword"),
+                new TestCaseArrayStrReturnsListOfInt(List.of(6, 9, 12), new String[]{"bar", "foo", "the"}, "barfoofoobarthefoobarman"),
                 new TestCaseArrayStrReturnsListOfInt(List.of(0), new String[]{"ab", "cd", "ef"}, "abcdef")
         );
 
         testCases.forEach((t) -> {
-            List<Integer> result = findSubstring(t.getTargetValue(), t.getTarget());
-            TestUtil.printTestResult(t.getExpected(), result);
+            List<Integer> result = findIndexesOfWordsConcatenations(t.getTargetValue(), t.getTarget());
+            TestUtil.printTestResultIgnoreOrder(t.getExpected(), result);
         });
     }
 
-    public static List<Integer> findSubstring(String s, String[] words) {
+    public static List<Integer> findIndexesOfWordsConcatenations(String s, String[] words) {
         List<Integer> result = new ArrayList<>();
-        int wordLength = words.length;
-        if (words.length == 0 || s.length() < wordLength) return Collections.emptyList();
+        if (words.length == 0 || s.length() < words[0].length()) return Collections.emptyList();
 
         List<String> concatenations = getAllConcatenationsOfWordPermutation(words);
-
         for (String c : concatenations) {
-            System.out.println(c);
+            result.addAll(getOccurrenceIndexes(s, c));
         }
-        System.out.println(concatenations.size());
+        return result;
+    }
 
-//        for (int i = 0; i < chars.length; i++) {
-//            if (chars[i] == needle.charAt(needleIndex)) {
-//                sb.append(chars[i]);
-//                if (sb.toString().equals(needle)) {
-//                    return i - needle.length() + 1;
-//                }
-//                needleIndex++;
-//            } else if (needleIndex > 0) {
-//                sb = new StringBuilder();
-//                needleIndex = 0;
-//                i--;
-//            }
-//        }
+    public static List<Integer> getOccurrenceIndexes(String haystack, String needle) {
+        List<Integer> result = new ArrayList<>();
+
+        int needleIndex = 0;
+
+        StringBuilder sb = new StringBuilder();
+        char[] chars = haystack.toCharArray();
+
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == needle.charAt(needleIndex)) {
+                sb.append(chars[i]);
+                if (sb.toString().equals(needle)) {
+                    result.add(i - needle.length() + 1);
+                    sb = new StringBuilder();
+                    needleIndex = 0;
+                    i--;
+                }
+                needleIndex++;
+            } else if (needleIndex > 0) {
+                sb = new StringBuilder();
+                needleIndex = 0;
+                i--;
+            }
+        }
 
         return result;
     }
