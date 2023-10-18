@@ -57,9 +57,35 @@ public class MinimumWindowSubstring {
 
     public static String getMinimumWindowSubstring(String s, String t) {
         String result = "";
+        if (s.length() < t.length()) return "";
+        if (s.equals(t)) return s;
 
+        char[] chars = s.toCharArray();
+        List<Character> targetChars = getCharsList(t);
+        List<String> substrings = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
 
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = 0; j < targetChars.size(); j++) {
+                if (chars[i] == targetChars.get(j)) {
+                    sb.append(chars[i]);
+                    targetChars.remove(j);
+                    if (targetChars.isEmpty()) {
+                        targetChars = getCharsList(t);
+                    }
+                }
+            }
+        }
+        return result;
+    }
 
+    private static List<Character> getCharsList(String str) {
+        char[] chars = str.toCharArray();
+        List<Character> result = new ArrayList<>();
+
+        for (int i = 0; i < chars.length; i++) {
+            result.add(chars[i]);
+        }
         return result;
     }
 
