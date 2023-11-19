@@ -4,10 +4,7 @@ import interview.livecoding.fortest.TestCaseArrayStr;
 import interview.livecoding.fortest.TestCaseArrayStrReturnsListOfInt;
 import interview.livecoding.fortest.TestUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -67,10 +64,12 @@ public class MinimumWindowSubstring {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < chars.length; i++) {
-            for (int j = 0; j < targetChars.size(); j++) {
-                if (chars[i] == targetChars.get(j)) {
+            Iterator<Character> targetCharsIterator = targetChars.iterator();
+            while (targetCharsIterator.hasNext()) {
+                Character next = targetCharsIterator.next();
+                if (chars[i] == next) {
                     sb.append(chars[i]);
-                    targetChars.remove(j);
+                    targetCharsIterator.remove();
                     if (targetChars.isEmpty()) {
                         targetChars = getCharsList(t);
                         substrings.add(sb.toString());
@@ -78,6 +77,7 @@ public class MinimumWindowSubstring {
                     }
                 }
             }
+
         }
         return substrings.stream().min(Comparator.comparingInt(String::length)).orElse("");
     }
