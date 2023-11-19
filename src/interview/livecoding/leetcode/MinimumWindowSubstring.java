@@ -6,6 +6,7 @@ import interview.livecoding.fortest.TestUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -72,11 +73,13 @@ public class MinimumWindowSubstring {
                     targetChars.remove(j);
                     if (targetChars.isEmpty()) {
                         targetChars = getCharsList(t);
+                        substrings.add(sb.toString());
+                        sb = new StringBuilder();
                     }
                 }
             }
         }
-        return result;
+        return substrings.stream().min(Comparator.comparingInt(String::length)).orElse("");
     }
 
     private static List<Character> getCharsList(String str) {
