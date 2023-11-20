@@ -54,31 +54,49 @@ public class MinimumWindowSubstring {
     }
 
     public static String getMinimumWindowSubstring(String s, String t) {
-        String result = "";
         if (s.length() < t.length()) return "";
         if (s.equals(t)) return s;
 
-        char[] chars = s.toCharArray();
-        List<Character> targetChars = getCharsList(t);
         List<String> substrings = new ArrayList<>();
+        char[] chars = s.toCharArray();
+
+        List<Character> targetChars = getCharsList(t);
         StringBuilder sb = new StringBuilder();
+        boolean substringBuildInProgress = false;
 
         for (int i = 0; i < chars.length; i++) {
-            Iterator<Character> targetCharsIterator = targetChars.iterator();
-            while (targetCharsIterator.hasNext()) {
-                Character next = targetCharsIterator.next();
-                if (chars[i] == next) {
-                    sb.append(chars[i]);
-                    targetCharsIterator.remove();
-                    if (targetChars.isEmpty()) {
-                        targetChars = getCharsList(t);
-                        substrings.add(sb.toString());
-                        sb = new StringBuilder();
+            if (targetChars.contains(chars[i])) {
+                if (!substringBuildInProgress) {
+                    substringBuildInProgress = true;
+                }
+                sb.append(chars[i]);
+
+                // remove matching char from targetChars
+                Iterator<Character> targetCharsIterator = targetChars.iterator();
+                while (targetCharsIterator.hasNext()) {
+                    Character next = targetCharsIterator.next();
+                    if (next == chars[i]) {
+                        targetCharsIterator.remove();
+//                        System.out.println("REMOVE " + chars[i]);
                     }
                 }
-            }
 
+                // if no chars left - reset substring build process
+                if (targetChars.isEmpty()) {
+                    substringBuildInProgress = false;
+                    targetChars = getCharsList(t);
+                    substrings.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+//                System.out.println(sb);
+//                System.out.println(targetChars);
+            } else {
+                if (substringBuildInProgress) {
+                    sb.append(chars[i]);
+                }
+            }
         }
+//        System.out.println(substrings);
         return substrings.stream().min(Comparator.comparingInt(String::length)).orElse("");
     }
 
