@@ -43,12 +43,13 @@ public class MinimumWindowSubstring {
     private static void runTestCases() {
         List<TestCaseArrayStr> testCases = List.of(
                 new TestCaseArrayStr("BANC", new String[] {"ADOBECODEBANC", "ABC"}),
+                new TestCaseArrayStr("CBANC", new String[] {"ADOBECODECBANC", "ABCC"}),
                 new TestCaseArrayStr("a", new String[] {"a", "a"}),
                 new TestCaseArrayStr("", new String[] {"a", "aa"})
         );
 
         testCases.forEach((t) -> {
-            String result = getMinimumWindowSubstring(t.getTarget()[0], t.getTarget()[1]);
+            String result = getMinimumWindowSubstring2(t.getTarget()[0], t.getTarget()[1]);
             TestUtil.printTestResult(t.getExpected(), result);
         });
     }
@@ -77,6 +78,7 @@ public class MinimumWindowSubstring {
                     Character next = targetCharsIterator.next();
                     if (next == chars[i]) {
                         targetCharsIterator.remove();
+                        break;
 //                        System.out.println("REMOVE " + chars[i]);
                     }
                 }
@@ -87,12 +89,51 @@ public class MinimumWindowSubstring {
                     targetChars = getCharsList(t);
                     substrings.add(sb.toString());
                     sb = new StringBuilder();
+                    System.out.println("RESET");
                 }
 //                System.out.println(sb);
 //                System.out.println(targetChars);
             } else {
                 if (substringBuildInProgress) {
                     sb.append(chars[i]);
+                }
+            }
+        }
+        System.out.println(substrings);
+        return substrings.stream().min(Comparator.comparingInt(String::length)).orElse("");
+    }
+
+    public static String getMinimumWindowSubstring2(String s, String t) {
+        if (s.length() < t.length()) return "";
+        if (s.equals(t)) return s;
+
+        List<String> substrings = new ArrayList<>();
+        char[] chars = s.toCharArray();
+
+        List<Character> targetChars = getCharsList(t);;
+        StringBuilder sb;
+
+        for (int i = 0; i < chars.length; i++) {
+            if (targetChars.contains(chars[i])) {
+                targetChars = getCharsList(t);
+                sb = new StringBuilder();
+                for (int j = i; j < chars.length; j++) {
+                    sb.append(chars[j]);
+
+                    Iterator<Character> iterator = targetChars.iterator();
+                    while (iterator.hasNext()) {
+                        Character next = iterator.next();
+                        if (next == chars[j]) {
+                            iterator.remove();
+                            break;
+                        }
+                    }
+
+                    if (targetChars.isEmpty()) {
+                        targetChars = getCharsList(t);
+                        substrings.add(sb.toString());
+                        break;
+                    }
                 }
             }
         }
