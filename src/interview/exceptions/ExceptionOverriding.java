@@ -37,7 +37,7 @@ class B extends A {
 
 //    public void aaa() throws FileNotFoundException {      // works
 
-    public void aaa() throws IOException, ArithmeticException, ArrayIndexOutOfBoundsException, OutOfMemoryError {    // works
+    public void aaa() throws IOException, ArithmeticException, ArrayIndexOutOfBoundsException, OutOfMemoryError {    // works if extended with unchecked exceptions
     }
 
 }
