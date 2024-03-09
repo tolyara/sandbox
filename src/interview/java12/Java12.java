@@ -1,13 +1,23 @@
 package interview.java12;
 
+import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * https://www.baeldung.com/java-12-new-features
  */
 public class Java12 {
 
-    public static void main(String[] args) {
+    public static final String FILE_1_TXT = "file1.txt";
+    public static final String FILE_2_TXT = "file2.txt";
+
+    public static void main(String[] args) throws IOException {
 //        indentation();
-        transform();
+//        transform();
+        mismatch();
     }
 
     private static void indentation() {
@@ -39,6 +49,29 @@ public class Java12 {
         CustomString transformed = text.transform(CustomString::new);
 
         System.out.println(transformed);
+    }
+
+    private static void mismatch() throws IOException {
+//        Path filePath1 = Files.createTempFile("file1", ".txt");
+//        Path filePath2 = Files.createTempFile("file2", ".txt");
+
+        Path path1 = Paths.get(FILE_1_TXT);
+        Path path2 = Paths.get(FILE_2_TXT);
+
+        Path filePath1 = !Files.exists(path1) ? Files.createFile(path1) : path1;
+        Path filePath2 = !Files.exists(path2) ? Files.createFile(path2) : path2;
+
+        /*
+            The return value will be -1L if the files are identical
+         */
+        Files.writeString(filePath1, "Java 12 Article");
+        Files.writeString(filePath2, "Java 12 Article");
+
+        long mismatch = Files.mismatch(filePath1, filePath2);
+        System.out.println(mismatch);
+
+        Files.delete(path1);
+        Files.delete(path2);
     }
 
 }
