@@ -1,11 +1,12 @@
 package interview.java12;
 
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.NumberFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,7 +24,10 @@ public class Java12 {
 //        transform();
 //        mismatch();
 //        teeing();
-        compactNumberFormatting();
+//        compactNumberFormatting();
+
+//        preview_switchExpression();
+        preview_patternMatchingForInstanceOf();
     }
 
     private static void indentation() {
@@ -113,6 +117,60 @@ public class Java12 {
                 NumberFormat.getCompactNumberInstance(new Locale("en", "US"), NumberFormat.Style.LONG);
         likesLong.setMaximumFractionDigits(2);
         System.out.println(likesLong.format(2592));  // "2.59 thousand"
+    }
+
+    private static void preview_switchExpression() {
+        DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
+        String typeOfDay = "";
+
+//        switch (dayOfWeek) {
+//            case MONDAY:
+//            case TUESDAY:
+//            case WEDNESDAY:
+//            case THURSDAY:
+//            case FRIDAY:
+//                typeOfDay = "Working Day";
+//                break;
+//            case SATURDAY:
+//            case SUNDAY:
+//                typeOfDay = "Day Off";
+//        }
+
+        typeOfDay = switch (dayOfWeek) {
+            case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "Working Day";
+            case SATURDAY, SUNDAY -> "Day Off";
+        };
+
+        System.out.println(typeOfDay);
+    }
+
+    private static void preview_patternMatchingForInstanceOf() {
+        long millis = System.currentTimeMillis();
+        System.out.println(millis);
+        Object obj;
+        long leftover = millis % 3;
+        if (leftover == 0) {
+            obj = "Hello World";
+        } else if (leftover == 1) {
+            obj = millis;
+        } else {
+            obj = new Object();
+        }
+        String result;
+
+//        if (obj instanceof String) {
+//            String s = (String) obj;
+//            int length = s.length();
+//        }
+
+        if (obj instanceof String s) {
+            result = "String type, length = " + s.length();
+        } else if (obj instanceof Long l) {
+            result = "Long type, odd/even = " + ((l % 2 == 0) ? "even" : "odd");
+        } else {
+            result = "Object type";
+        }
+        System.out.println(result);
     }
 
 }
