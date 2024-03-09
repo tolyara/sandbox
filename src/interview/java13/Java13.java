@@ -6,7 +6,8 @@ package interview.java13;
 public class Java13 {
 
     public static void main(String[] args) {
-        switchExpressions();
+//        switchExpressions();
+        textBlocks();
     }
 
     private static void switchExpressions() {
@@ -31,6 +32,22 @@ public class Java13 {
         };
 
         System.out.println(result);
+    }
+
+    private static void textBlocks() {
+        String JSON_STRING
+                = "{\r\n" + "\"name\" : \"Baeldung\",\r\n" + "\"website\" : \"https://www.%s.com/\"\r\n" + "}";
+
+        String TEXT_BLOCK_JSON = """
+                {
+                    "name" : "Baeldung",
+                    "website" : "https://www.%s.com/"
+                }
+                """;
+
+        System.out.println(JSON_STRING);
+        System.out.println();
+        System.out.println(TEXT_BLOCK_JSON);
     }
 
 }
