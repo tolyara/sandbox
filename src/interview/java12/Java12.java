@@ -5,6 +5,8 @@ import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * https://www.baeldung.com/java-12-new-features
@@ -17,7 +19,8 @@ public class Java12 {
     public static void main(String[] args) throws IOException {
 //        indentation();
 //        transform();
-        mismatch();
+//        mismatch();
+        teeing();
     }
 
     private static void indentation() {
@@ -85,6 +88,16 @@ public class Java12 {
 
         Files.delete(path1);
         Files.delete(path2);
+    }
+
+    private static void teeing() {
+//        double average = Stream.of(1, 2, 3, 4, 5)    // -> 3
+        double average = Stream.of(6, 17, 20, 1)       // -> 11
+                .collect(Collectors.teeing(
+                        Collectors.summingDouble(i -> i),
+                        Collectors.counting(),
+                        (sum, count) -> sum / count));
+        System.out.println(average);
     }
 
 }
