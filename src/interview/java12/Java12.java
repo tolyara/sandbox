@@ -5,6 +5,8 @@ import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +22,8 @@ public class Java12 {
 //        indentation();
 //        transform();
 //        mismatch();
-        teeing();
+//        teeing();
+        compactNumberFormatting();
     }
 
     private static void indentation() {
@@ -98,6 +101,18 @@ public class Java12 {
                         Collectors.counting(),
                         (sum, count) -> sum / count));
         System.out.println(average);
+    }
+
+    private static void compactNumberFormatting() {
+        NumberFormat likesShort =
+                NumberFormat.getCompactNumberInstance(new Locale("en", "US"), NumberFormat.Style.SHORT);
+        likesShort.setMaximumFractionDigits(2);
+        System.out.println(likesShort.format(2592)); // "2.59K"
+
+        NumberFormat likesLong =
+                NumberFormat.getCompactNumberInstance(new Locale("en", "US"), NumberFormat.Style.LONG);
+        likesLong.setMaximumFractionDigits(2);
+        System.out.println(likesLong.format(2592));  // "2.59 thousand"
     }
 
 }
