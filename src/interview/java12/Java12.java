@@ -62,10 +62,23 @@ public class Java12 {
         Path filePath2 = !Files.exists(path2) ? Files.createFile(path2) : path2;
 
         /*
-            The return value will be -1L if the files are identical
+            1) The return value will be -1L if the files are identical
          */
-        Files.writeString(filePath1, "Java 12 Article");
-        Files.writeString(filePath2, "Java 12 Article");
+//        Files.writeString(filePath1, "Java 12 Article");
+//        Files.writeString(filePath2, "Java 12 Article");
+
+        /*
+            2) The return value will be the position of the first mismatched byte if the files are not identical
+         */
+//        Files.writeString(filePath1, "Java 12 Article");
+//        Files.writeString(filePath2, "Java 12 Tutorial");
+
+        /*
+            3) The return value will be the size of the smaller file (in bytes) when the files are of different sizes
+            and every byte of the smaller file is identical to the corresponding byte of the larger file.
+         */
+        Files.writeString(filePath1, "Java 12");
+        Files.writeString(filePath2, "Java 12 Tutorial");
 
         long mismatch = Files.mismatch(filePath1, filePath2);
         System.out.println(mismatch);
