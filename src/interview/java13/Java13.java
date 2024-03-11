@@ -45,9 +45,36 @@ public class Java13 {
                 }
                 """;
 
-        System.out.println(JSON_STRING);
+//        System.out.println(JSON_STRING);
+//        System.out.println();
+//        System.out.println(TEXT_BLOCK_JSON);
+
         System.out.println();
+        String TEXT_BLOCK_JSON_2 = """
+                {
+                    "name" :    "Baeldung",
+                    "website" : "https://www.%s.com/"
+                }
+                """;
+        TEXT_BLOCK_JSON_2 = TEXT_BLOCK_JSON_2.indent(4);
+        TEXT_BLOCK_JSON_2 = TEXT_BLOCK_JSON_2.indent(-4);
+//        TEXT_BLOCK_JSON_2 = TEXT_BLOCK_JSON_2.stripIndent();  // Note: doesn't work as expected
+//        System.out.println(TEXT_BLOCK_JSON_2);
+
+        /*
+            translateEscapes() – translates escape sequences such as “\\t” to “\t”
+         */
+        String JSON_STRING_2 = """ 
+                Hello,\\nuser""";
+//        System.out.println(JSON_STRING_2);
+//        System.out.println();
+//        System.out.println(JSON_STRING_2.translateEscapes());
+
+        /*
+            formatted() – works the same as String::format, but for text blocks
+         */
         System.out.println(TEXT_BLOCK_JSON);
+        System.out.println(TEXT_BLOCK_JSON.formatted("baeldung"));
     }
 
 }
