@@ -3,6 +3,7 @@ package interview.java11;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,7 +18,8 @@ public class Java11_2 {
 //        stringMethods();
 //        fileMethods();
 //        collectionToArray();
-        notPredicate();
+//        notPredicate();
+        localVarSyntax();
     }
 
     private static void stringMethods() {
@@ -50,6 +52,19 @@ public class Java11_2 {
                 .filter(Predicate.not(String::isBlank))
                 .collect(Collectors.toList());
         System.out.println(withoutBlanks);
+    }
+
+    private static void localVarSyntax() {
+//        List<String> sampleList = Arrays.asList("Java", "Kotlin");
+        List<String> sampleList = new ArrayList<>();
+        sampleList.add("Java");
+        sampleList.add("Kotlin");
+//        sampleList.add(null);
+
+        String resultString = sampleList.stream()
+                .map((@NotNull var x) -> x.toUpperCase())
+                .collect(Collectors.joining(", "));
+        System.out.println(resultString);
     }
 
 }
