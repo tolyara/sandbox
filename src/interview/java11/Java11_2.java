@@ -3,7 +3,9 @@ package interview.java11;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -13,7 +15,9 @@ public class Java11_2 {
 
     public static void main(String[] args) throws IOException {
 //        stringMethods();
-        fileMethods();
+//        fileMethods();
+//        collectionToArray();
+        notPredicate();
     }
 
     private static void stringMethods() {
@@ -32,6 +36,20 @@ public class Java11_2 {
         Path filePath = Files.writeString(Files.createTempFile("demo", ".txt"), "Sample text");
         String fileContent = Files.readString(filePath);
         System.out.println(fileContent.equals("Sample text"));
+    }
+
+    private static void collectionToArray() {
+        List<String> sampleList = Arrays.asList("Java", "Kotlin");
+        String[] sampleArray = sampleList.toArray(String[]::new);
+        Arrays.stream(sampleArray).forEach(System.out::println);
+    }
+
+    private static void notPredicate() {
+        List<String> sampleList = Arrays.asList("Java", "\n \n", "Kotlin", " ");
+        List<String> withoutBlanks = sampleList.stream()
+                .filter(Predicate.not(String::isBlank))
+                .collect(Collectors.toList());
+        System.out.println(withoutBlanks);
     }
 
 }
