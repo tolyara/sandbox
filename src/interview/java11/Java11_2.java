@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -91,7 +92,29 @@ public class Java11_2 {
 
     private static void nestBasedAccessControl() {
         System.out.println(MainClass.class.isNestmateOf(MainClass.NestedClass.class));  // true
-        System.out.println(MainClass.class.isNestmateOf(MainClass2.class));  // false
+        System.out.println(MainClass.class.isNestmateOf(MainClass2.class) + "\n");  // false
+
+        System.out.println(MainClass.NestedClass.class.getNestHost().getSimpleName() + "\n");  // MainClass
+
+        Set<String> nestedMembers = Arrays.stream(MainClass.NestedClass.class.getNestMembers())
+                .map(Class::getSimpleName)
+                .collect(Collectors.toSet());
+        System.out.println(nestedMembers);
+    }
+
+    private static void runningJavaFiles() {
+        /*
+            A major change in this version is that we don’t need to compile the Java source files with javac explicitly anymore
+
+            $ javac HelloWorld.java
+            $ java HelloWorld
+            Hello Java 8!
+
+            Instead, we can directly run the file using the java command:
+
+            $ java HelloWorld.java
+            Hello Java 11!
+         */
     }
 
 }
