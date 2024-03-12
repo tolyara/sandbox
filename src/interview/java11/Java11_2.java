@@ -1,8 +1,13 @@
 package interview.java11;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,12 +19,14 @@ import java.util.stream.Collectors;
  */
 public class Java11_2 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 //        stringMethods();
 //        fileMethods();
 //        collectionToArray();
 //        notPredicate();
-        localVarSyntax();
+//        localVarSyntax();
+//        httpClient();
+        nestBasedAccessControl();
     }
 
     private static void stringMethods() {
@@ -67,4 +74,33 @@ public class Java11_2 {
         System.out.println(resultString);
     }
 
+    private static void httpClient() throws IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .connectTimeout(Duration.ofSeconds(20))
+                .build();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .GET()
+//                .uri(URI.create("http://localhost:" + port))
+                .uri(URI.create("http://www.google.com"))
+                .build();
+        HttpResponse httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        System.out.println(httpResponse.statusCode());
+        System.out.println(httpResponse.body());
+    }
+
+    private static void nestBasedAccessControl() {
+        System.out.println(MainClass.class.isNestmateOf(MainClass.NestedClass.class));  // true
+        System.out.println(MainClass.class.isNestmateOf(MainClass2.class));  // false
+    }
+
+}
+
+class MainClass {
+
+    class NestedClass {}
+
+}
+
+class MainClass2 {
 }
