@@ -7,7 +7,8 @@ public class Java14 {
 
     public static void main(String[] args) {
 //        switchExpressions();
-        textBlocks();
+//        textBlocks();
+        preview_patternMatchingForInstanceOf("123456");
     }
 
     private static void switchExpressions() {
@@ -33,11 +34,21 @@ public class Java14 {
     private static void textBlocks() {
 //        String multiline = "A quick brown fox jumps over a lazy dog; the lazy dog howls loudly.";
 
+//        String multiline = """
+//                A quick brown fox jumps over a lazy dog; \
+//                the lazy dog howls loudly.""";
+
         String multiline = """
-                A quick brown fox jumps over a lazy dog; \
-                the lazy dog howls loudly.""";
+                A quick brown fox \s jumps over a lazy dog;""";
 
         System.out.println(multiline);
+    }
+
+    private static void preview_patternMatchingForInstanceOf(Object obj) {
+        if (obj instanceof String str) {
+            int len = str.length();
+            System.out.println(len);
+        }
     }
 
 }
