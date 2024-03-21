@@ -8,7 +8,8 @@ public class Java14 {
     public static void main(String[] args) {
 //        switchExpressions();
 //        textBlocks();
-        preview_patternMatchingForInstanceOf("123456");
+//        preview_patternMatchingForInstanceOf("123456");
+        records();
     }
 
     private static void switchExpressions() {
@@ -51,4 +52,25 @@ public class Java14 {
         }
     }
 
+    private static void records() {
+        User user1 = new User(1, "UserOne");
+        User user2 = new User(2, "UserTwo");
+        User user1copy = new User(1, "UserOne");
+
+        System.out.println(user1.id());
+        System.out.println(user1.username());
+        System.out.println(user1.hashCode());
+        System.out.println(user1);
+
+        System.out.println(user1.equals(user2));    // false
+        System.out.println(user1.equals(user1copy));    // true
+    }
+
 }
+
+/*
+    This simple declaration will automatically add a constructor, getters, equals, hashCode and toString methods for us.
+ */
+record User(int id, String username) {
+};
+
