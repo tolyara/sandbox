@@ -9,7 +9,8 @@ public class Java14 {
 //        switchExpressions();
 //        textBlocks();
 //        preview_patternMatchingForInstanceOf("123456");
-        records();
+//        records();
+        NPE_helpful();
     }
 
     private static void switchExpressions() {
@@ -52,6 +53,9 @@ public class Java14 {
         }
     }
 
+    /*
+        The simple 'record' declaration will automatically add a constructor, getters, equals, hashCode and toString methods for us.
+     */
     private static void records() {
         User user1 = new User(1, "UserOne");
         User user2 = new User(2, "UserTwo");
@@ -64,6 +68,14 @@ public class Java14 {
 
         System.out.println(user1.equals(user2));    // false
         System.out.println(user1.equals(user1copy));    // true
+    }
+
+    private static void NPE_helpful() {
+        int[] arr = null;
+        arr[0] = 1;
+
+        // before 14: java.lang.NullPointerException at interview.java14.Java14.main(Java14.java:77)
+        // after 14: java.lang.NullPointerException: Cannot store to int array because "arr" is null
     }
 
 }
