@@ -45,17 +45,18 @@ record Person(String name, int age) {
 
 }
 
-abstract sealed class SealedPerson
-        permits Employee, Manager {
-}
+//abstract sealed class SealedPerson
+//        permits Employee, Manager {
+//}
 
 /*
     It’s important to note that any class that extends a sealed class must itself be declared sealed, non-sealed, or final.
     This ensures the class hierarchy remains finite and known by the compiler.
  */
-final class Employee extends SealedPerson {
-}
 
-non-sealed class Manager extends SealedPerson {
-}
+//final class Employee extends SealedPerson {
+//}
+
+//non-sealed class Manager extends SealedPerson {
+//}
 
