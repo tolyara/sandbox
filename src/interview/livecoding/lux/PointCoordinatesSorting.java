@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Main {
+public class PointCoordinatesSorting {
 
     public static void main(String[] args) {
         Point a = new Point(2, 4);  // 4.47
@@ -23,7 +23,7 @@ public class Main {
     }
 
     private static List<Point> sort(List<Point> src) {
-        return src.stream().map(p -> new PointDistance(p)).sorted().map(pd -> pd.point).collect(Collectors.toList());
+        return src.stream().map(PointDistance::new).sorted().map(pd -> pd.point).collect(Collectors.toList());
     }
 
 }
