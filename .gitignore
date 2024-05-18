@@ -9,3 +9,6 @@
 *.html
 /.idea/compiler.xml
 /.idea/sandbox.iml
+
+/output/*
+/.idea/libraries/junit_4_13.xml
