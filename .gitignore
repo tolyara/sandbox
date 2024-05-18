@@ -8,3 +8,4 @@
 *.class
 *.html
 /.idea/compiler.xml
+/.idea/sandbox.iml
